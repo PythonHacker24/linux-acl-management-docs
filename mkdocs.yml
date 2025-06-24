@@ -1,0 +1,15 @@
+site_name: Linux ACL Management System
+theme:
+  name: shadcn
+  pygments_style: dracula
+  icon: heroicons:cube
+  features:
+    - navigation.tabs
+    - content.code.copy
+    - content.action.edit
+    - content.action.view
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
