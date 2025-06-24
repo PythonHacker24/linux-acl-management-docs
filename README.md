@@ -106,10 +106,7 @@ This project is developed as part of Google Summer of Code 2025, in collaboratio
 
 ### Technologies
 
-- **Backend:** Golang, net/http
-- **API:** gRPC, REST
-- **Infrastructure:** 
-- **Packaging:** Tarball
+- **Docs Framework:** MkDocs, `mkdocs-shadcn` theme, Markdown
 
 ## License
 
