@@ -27,7 +27,7 @@ Copy the following commands to install it via command line. Make sure you have `
 curl -L -o laclm.tar.gz https://github.com/PythonHacker24/linux-acl-management-backend/raw/refs/heads/development-v1/build/laclm-linux-amd64-source.tar.gz
 ```
 
-#### Linx ARM64 Architecture
+#### Linux ARM64 Architecture
 
 ```bash
 curl -L -o laclm.tar.gz https://github.com/PythonHacker24/linux-acl-management-backend/raw/refs/heads/development-v1/build/laclm-linux-arm64-source.tar.gz
@@ -84,7 +84,7 @@ Copy the following commands to install it via command line. Make sure you have `
 curl -L -o laclm https://github.com/PythonHacker24/linux-acl-management-backend/raw/refs/heads/development-v1/bin/laclm-linux-amd64
 ```
 
-#### Linx ARM64 Architecture
+#### Linux ARM64 Architecture
 
 ```bash
 curl -L -o laclm https://github.com/PythonHacker24/linux-acl-management-backend/raw/refs/heads/development-v1/bin/laclm-linux-amd64
