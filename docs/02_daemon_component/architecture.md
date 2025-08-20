@@ -96,7 +96,7 @@ The response might look like:
 }
 ```
 
-### 1. Ping gRPC Service
+### 2. Ping gRPC Service
 
 The `PingService` provides a simple RPC to check if the server is reachable.
 
