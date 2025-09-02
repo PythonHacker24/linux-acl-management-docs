@@ -321,4 +321,4 @@ grpcui -plaintext <hostname>:<port>
 
 You will get a localhost link on the system you are testing. Navigate to the URL and select `PingService`. If you are able to ping, then ACL API Daemon is working fine. 
 
-To test ACL Core Daemon, you need to select `ACLEntry.Service` and you can try to change ACL value of a file by filling the parameters. The schema can be found [here](schema_for_aclentry.service).
+To test ACL Core Daemon, you need to select `ACLEntry.Service` and you can try to change ACL value of a file by filling the parameters. The schema can be found [here]().

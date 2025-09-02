@@ -1,6 +1,6 @@
 site_name: Vortex | Linux ACL Management System
 theme:
-  name: shadcn
+  name: readthedocs
   pygments_style: dracula
   icon: heroicons:cube
   features:

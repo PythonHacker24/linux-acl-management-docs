@@ -24,4 +24,4 @@ Institutions manage vast amounts of data, often reaching petabyte scales across 
 - Department of Biomedical Informatics, Emory University
 - Google Summer of Code 2025 Program
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) file for details.
