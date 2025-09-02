@@ -17,6 +17,6 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs mkdocs-shadcn
-      - run: mkdocs gh-deploy --force --remote-name origin
+      - run: mkdocs gh-deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
