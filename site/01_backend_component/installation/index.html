@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // for search plugin notably
+        const base_url = "None";
+    </script>
+    <script>
+        const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+        darkTheme.onchange = (e) => {
+            if (e.matches) {
+                document.documentElement.classList.add("dark")
+                localStorage.theme = 'dark';
+            } else {
+                document.documentElement.classList.remove("dark")
+                localStorage.removeItem("theme")
+            }
+        };
+
+        // On page load. Priotiry to lcaolStorage
+        if (localStorage.theme === "dark") {
+            document.documentElement.classList.add("dark")
+        } else if (localStorage.theme === "light") {
+            document.documentElement.classList.remove("dark")
+        } else if (darkTheme.matches) {
+            document.documentElement.classList.add("dark")
+        } else {
+            document.documentElement.classList.remove("dark")
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Installing Backend Server - Vortex | Linux ACL Management System</title>
+    
+
+
+<title>Installing Backend Server</title>
+
+
+
+
+
+
+
+
+
+
+<!-- Open Graph (Facebook, LinkedIn) -->
+
+<meta property="og:title" content="Installing Backend Server">
+
+
+
+
+
+
+
+
+
+
+<!-- Twitter Card -->
+
+<meta name="twitter:title" content="Installing Backend Server">
+
+
+
+
+
+
+<!-- JSON-LD Structured Data -->
+
+
+
+    <link rel="icon" href="../../img/favicon.ico">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/geist.css" rel="stylesheet">
+    
+    <link href="../../css/pygments/dracula.css" rel="stylesheet">
+    
+
+    <script src="../../js/callbacks.js"></script>
+
+    
+
+    
+
+    
+
+</head>
+
+<body class="w-screen overflow-x-hidden bg-foreground md:bg-background text-foreground scroll-smooth m-0 p-0">
+    <div id="inner-body"
+        class="min-h-screen bg-background origin-[top_center_0px] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">
+        <header
+    class="border-grid sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div class="w-full mx-auto 3xl:max-w-8xl">
+        <div
+            class="xl:px-6 h-14 w-full max-w-8xl mx-auto px-4 border-x border-grid flex flex-row justify-between items-center">
+            <div class="mr-4 hidden md:flex">
+                <a href="/" class="mr-4 flex items-center gap-2 lg:mr-6">
+                    
+
+<iconify-icon icon="heroicons:cube" noobserver></iconify-icon>
+
+
+                    <h1 class="hidden lg:inline-block font-bold text-md">
+                        
+                        Vortex | Linux ACL Management System
+                        
+                    </h1>
+                </a>
+            </div>
+            <button
+                class="cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground py-2 -ml-2 mr-2 h-8 w-8 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R15u6ja:"
+                data-state="closed" onclick="onMobileMenuButtonClick(event)">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="!size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"></path>
+                </svg>
+                <span class="sr-only">Toggle Menu</span>
+            </button>
+            <div class="flex flex-1 items-center justify-between gap-2 md:justify-end">
+                <button onclick="onSearchBarClick(event)"
+    class="cursor-pointer inline-flex items-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 relative h-8 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64">
+    <span class="hidden lg:inline-flex">Search documentation...</span>
+    <span class="inline-flex lg:hidden">Search...</span>
+    <kbd
+        class="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+        <span class="text-xs">⌘</span>K
+    </kbd>
+</button>
+<dialog id="search-dialog" onclick="onSearchDialogClick(event)"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg border overflow-hidden p-0">
+    <div class="w-lg gap-4">
+        <div class="flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground">
+            <div class="w-full flex items-center border-b px-3" cmdk-input-wrapper="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="mr-2 h-4 w-4 shrink-0 opacity-50">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <!-- <script>
+                    let debounceTimer;
+                    const onInputHandler = function (event) {
+                        const query = event.target.value;
+                        clearTimeout(debounceTimer);
+                        debounceTimer = setTimeout(() => {
+                            if (searchWorker && (query.length > 2)) {
+                                console.log(`Posting message { "query": "${query}" }`)
+                                // https://lunrjs.com/guides/searching.html
+                                // we should append a wilcard and also a boost on exact term
+                                const lunrQuery = `${query}^10 ${query}* ${query}~1`;
+                                searchWorker.postMessage({ "query": lunrQuery });
+                            } else if (query.length > 2) {
+                                console.warn("searchWorker is not defined")
+                            } else {
+                                const results = document.getElementById("mkdocs-search-results");
+                                if (results) {
+                                    while (results.firstChild) {
+                                        results.removeChild(results.firstChild);
+                                    }
+                                }
+                            }
+                        }, 300);
+                    };
+                </script> -->
+                <input
+                    class="flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Type a command or search..." autocomplete="off" autocorrect="off" spellcheck="false"
+                    aria-autocomplete="list" role="combobox" aria-expanded="true" type="text" value=""
+                    oninput="onInputHandler(event)">
+            </div>
+        </div>
+        <div id="mkdocs-search-results" class="max-h-[300px] overflow-y-auto overflow-x-hidden">
+            <!-- search results go there -->
+        </div>
+    </div>
+</dialog>
+<script>
+    document.removeEventListener("keydown", searchShortcutHandler);
+    document.addEventListener("keydown", searchShortcutHandler);
+</script>
+                <div class="flex items-center gap-0.5">
+                    
+                    <button
+                        class="cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground py-2 group/toggle h-8 w-8 px-0"
+                        onclick="onThemeSwitch(event)">
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round"
+    class="h-4 w-4 dark:hidden not-dark:block">
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+</svg>
+                        
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round"
+    class="h-4 w-4 not-dark:hidden dark:block">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2" />
+    <path d="M12 20v2" />
+    <path d="m4.93 4.93 1.41 1.41" />
+    <path d="m17.66 17.66 1.41 1.41" />
+    <path d="M2 12h2" />
+    <path d="M20 12h2" />
+    <path d="m6.34 17.66-1.41 1.41" />
+    <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+                        
+                        <span class="sr-only">Toggle theme</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="border-grid flex flex-1 flex-col">
+            <div class="w-full mx-auto 3xl:max-w-8xl">
+                <div
+                    class="px-4 w-full max-w-8xl mx-auto xl:px-6 flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
+                    <aside
+                        class="border-grid fixed top-14 z-30 hidden h-[calc(100vh-3.55rem)] w-full shrink-0 border-r md:sticky md:block">
+                        <div
+    class="no-scrollbar [&::-webkit-scrollbar]:hidden h-full overflow-auto py-6 pr-4 lg:py-8 flex flex-col gap-[.125rem]">
+    
+    
+    
+
+    
+    
+    <a href="../.." 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Welcome
+    
+
+    
+
+    
+
+    
+</a>
+    
+    
+
+
+    
+    
+    <div class="flex flex-col gap-1 mt-5 first:mt-0">
+        <h4 class="rounded-md px-2 py-1 text-sm font-semibold">Getting started</h4>
+        <div class="grid grid-flow-row auto-rows-max gap-[.125rem]">
+            
+            <a href="../../00_getting_started/project_structure/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Project Structure
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../00_getting_started/installation/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Requirements
+    
+
+    
+
+    
+
+    
+</a>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="flex flex-col gap-1 mt-5 first:mt-0">
+        <h4 class="rounded-md px-2 py-1 text-sm font-semibold">Backend component</h4>
+        <div class="grid grid-flow-row auto-rows-max gap-[.125rem]">
+            
+            <a href="../quick_start/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Quick Start
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../architecture/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Architecture
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="./" data-active 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Installation
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../configuration/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Configuration
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../deployment/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Deployment
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../troubleshooting/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Troubleshooting
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../development/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Development
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../changelog/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Changelog
+    
+
+    
+
+    
+
+    
+</a>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="flex flex-col gap-1 mt-5 first:mt-0">
+        <h4 class="rounded-md px-2 py-1 text-sm font-semibold">Daemon component</h4>
+        <div class="grid grid-flow-row auto-rows-max gap-[.125rem]">
+            
+            <a href="../../02_daemon_component/quick_start/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Quick Start
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/architecture/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Architecture
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/installation/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Installation
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/configuration/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Configuration
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/deployment/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Deployment
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/troubleshooting/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Troubleshooting
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/development/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Development
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/changelog/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Changelog
+    
+
+    
+
+    
+
+    
+</a>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="flex flex-col gap-1 mt-5 first:mt-0">
+        <h4 class="rounded-md px-2 py-1 text-sm font-semibold">Frontend component</h4>
+        <div class="grid grid-flow-row auto-rows-max gap-[.125rem]">
+            
+            <a href="../../03_frontend_component/quick_start/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Quick Start
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../03_frontend_component/architecture/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Architecture
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../03_frontend_component/installation/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Installation
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../03_frontend_component/troubleshooting/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Troubleshooting
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../03_frontend_component/development/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Development
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../03_frontend_component/changelog/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Changelog
+    
+
+    
+
+    
+
+    
+</a>
+            
+        </div>
+    </div>
+    
+    
+    
+</div>
+                    </aside>
+                    <main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+                        <div class="mx-auto w-full min-w-0 xl:max-w-2xl">
+                            <article class="typography w-full">
+    
+    <div class="mb-4 flex items-center space-x-1 text-sm leading-none text-muted-foreground">
+    
+
+
+<span class="truncate">Backend component</span>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right h-3.5 w-3.5">
+    <path d="m9 18 6-6-6-6"></path>
+</svg>
+<div class="text-foreground">Installing Backend Server</div>
+
+</div>
+    
+    
+    <h1 class="tracking-tight">Installing Backend Server</h1>
+    
+    
+    <p class="summary">
+        Installing the backend server in the Linux ACL Management System
+    </p>
+    
+    <p><br></p>
+<h1 id="backend-quick-start">Backend Quick Start<a class="headerlink" href="#backend-quick-start" title="Permanent link">&para;</a></h1>
+<p>This guide will help you get up and running quickly, whether you’re developing locally or deploying in a containerized environment.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Go (version 1.20+ recommended, for building with source code method)</li>
+<li>Docker and Docker Compose (for containerized setup only)</li>
+<li>PostgreSQL and Redis</li>
+<li>(Optional) Make (for using the Makefile)</li>
+</ul>
+<h2 id="1-getting-the-backend-component">1. Getting the Backend Component<a class="headerlink" href="#1-getting-the-backend-component" title="Permanent link">&para;</a></h2>
+<h3 id="through-prebuilt-binaries">Through Prebuilt Binaries<a class="headerlink" href="#through-prebuilt-binaries" title="Permanent link">&para;</a></h3>
+<p>The prebuilt binaries are available to install on GitHub Releases for the Linux ACL Management Project.</p>
+<p>Here are one line commands to install them for all the architectures. Make sure you have <code>curl</code> installed.</p>
+<h3 id="for-linux-x86_64">For Linux x86_64<a class="headerlink" href="#for-linux-x86_64" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-L<span class="w"> </span>https://github.com/example-org/aclm/releases/latest/download/aclm-linux-amd64<span class="w"> </span>-o<span class="w"> </span>/usr/local/bin/aclm
+chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/aclm
+</code></pre></div>
+
+<h3 id="for-linux-arm64">For Linux ARM64<a class="headerlink" href="#for-linux-arm64" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-L<span class="w"> </span>https://github.com/example-org/aclm/releases/latest/download/aclm-linux-amd64<span class="w"> </span>-o<span class="w"> </span>/usr/local/bin/aclm
+chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/aclm
+</code></pre></div>
+
+<h3 id="for-linux-armv7">For Linux ARMv7<a class="headerlink" href="#for-linux-armv7" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-L<span class="w"> </span>https://github.com/example-org/aclm/releases/latest/download/aclm-linux-amd64<span class="w"> </span>-o<span class="w"> </span>/usr/local/bin/aclm
+chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/aclm
+</code></pre></div>
+
+<h3 id="through-github-source-code">Through GitHub Source Code<a class="headerlink" href="#through-github-source-code" title="Permanent link">&para;</a></h3>
+<p>Visit the <a href="">Official GitHub Repository</a> for Linux ACL Management System for the complete source code.</p>
+<p>To clone the repository from GitHub, use the following command. Make sure you have <code>git</code> installed on your system.</p>
+<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/PythonHacker24/linux-acl-management-backend.git
+</code></pre></div>
+
+<h2 id="2-configuration">2. Configuration<a class="headerlink" href="#2-configuration" title="Permanent link">&para;</a></h2>
+<p>When working with the Linux ACL Management System, all you need is the backend binary, <code>config.yaml</code>, and <code>.env</code> setup with proper paramaters. With these 3 components, you are ready to deploy the backend component.</p>
+<p>The <code>config.yaml</code> is the heart of the Linux ACL Management System and contains all you need to setup the system.</p>
+<p><code>.env</code> contains all the parameters that's meant to be server specific and kept secret (for example, database passwords, auth token parameters, etc.)</p>
+<p>More about configuration here: <em>link to config</em></p>
+<h2 id="3-database-setup">3. Database Setup<a class="headerlink" href="#3-database-setup" title="Permanent link">&para;</a></h2>
+<p>Linux ACL Management System uses PostgreSQL and Redis for operations purposes. Make sure both of them are running and are configured to be used with the backend. If you’re running the database locally, create the database and apply migrations:</p>
+<h3 id="postgresql">PostgreSQL<a class="headerlink" href="#postgresql" title="Permanent link">&para;</a></h3>
+<p>It's recommended to follow the <a href="https://www.postgresql.org/docs/">Official PostgreSQL</a> docs for setting it up. It can run on a seprate server or on the same server on which the backend is running. </p>
+<p>PostgreSQL is used as an archival database where sessions and transactions are stored when they are expired or the backend system is trigged to quit it's operation in middle of operation.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Start PostgreSQL</span>
+sudo<span class="w"> </span>service<span class="w"> </span>postgresql<span class="w"> </span>start
+
+<span class="c1"># Create the database (example)</span>
+createdb<span class="w"> </span>your_db_name
+</code></pre></div>
+
+<p>After setting up the PostgreSQL database, you need to configure the schema for compatibility with the backend component. </p>
+<p>You just need to load up the following schema given <a href="https://github.com/PythonHacker24/linux-acl-management-backend/blob/development-v1/db/schema.sql">here</a>. You just have to copy paste the whole schema and execute it inside the database.</p>
+<h3 id="redis">Redis<a class="headerlink" href="#redis" title="Permanent link">&para;</a></h3>
+<p>Linux ACL Management System uses Redis for mirroring states of sessions and transactions for streaming on web dashboard. This allows the internal process scheduler to keep working on processing them without locking the resources for streaming on web dashboards frequently. When ever changes are made in sessions and transactions inside the backend system, the data is volunterly reflected in Redis which is ready to be served on frontend and any resource demanding it.  </p>
+<p>For more information on installing Redis, refer the <a href="https://redis.io/docs/latest/">Official Redis</a> docs.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Start Redis</span>
+sudo<span class="w"> </span>service<span class="w"> </span>redis-server<span class="w"> </span>start
+</code></pre></div>
+
+<p>Alternatively, if you’re using Docker Compose, the services will be created automatically.</p>
+<h2 id="4-build-only-for-users-with-source-code">4. Build (only for users with source code)<a class="headerlink" href="#4-build-only-for-users-with-source-code" title="Permanent link">&para;</a></h2>
+<p>There are currently 3 ways of installing Linux ACL Management System Backend Component. </p>
+<h3 id="using-go">Using Go<a class="headerlink" href="#using-go" title="Permanent link">&para;</a></h3>
+<p>You can build and run the backend using Go directly, the Makefile, or Docker Compose.</p>
+<p>Building through Go can be done through the Golang compiler with one command. Incase you don't have Go installed on your system, refer to the <a href="https://go.dev/doc/install">Official Golang Docs</a>.</p>
+<div class="codehilite"><pre><span></span><code>go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>bin/backend<span class="w"> </span>./cmd/laclm
+</code></pre></div>
+
+<h3 id="using-makefile">Using Makefile<a class="headerlink" href="#using-makefile" title="Permanent link">&para;</a></h3>
+<p>For installing via Makefile, make sure you have <code>make</code> installed and follow the commands listed below. The Makefile will take care of all the building procdures as per your system. Just make sure that all the required dependences are installed (like Go, protoc, etc.)</p>
+<p>For installing <code>make</code>, follow the <a href="https://www.gnu.org/software/make/">Official Page</a> for GNU's make project</p>
+<div class="codehilite"><pre><span></span><code>make<span class="w"> </span>build
+</code></pre></div>
+
+<h3 id="using-docker">Using Docker<a class="headerlink" href="#using-docker" title="Permanent link">&para;</a></h3>
+<p>For systems with docker installed and configured on them, you can use the <code>Dockerfile</code> for building the project image and running it. </p>
+<p>Docker Compose is meant to be a testing/development environment which loads the project image and pairs it up with OpenLDAP, PHPLdapAdmin, etc. </p>
+<p><strong>Current <code>docker-compose.yaml</code> not recommended for production usage.</strong></p>
+<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>up<span class="w"> </span>--build
+</code></pre></div>
+
+<p>Docker Compose will build the image, start the containers, and run the backend along with its dependencies.</p>
+<div class="admonition info">
+<p class="admonition-title">Note:</p>
+<p>A complete Docker-Compose file with databases and default configuration for quick deployment is under development. This will allow users to deploy the complete backend components with a few commands.</p>
+</div>
+<h2 id="5-useful-commands">5. Useful Commands<a class="headerlink" href="#5-useful-commands" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Build:</strong> <code>make build</code></li>
+<li><strong>Run:</strong> <code>make run</code></li>
+<li><strong>Test:</strong> <code>make test</code></li>
+<li><strong>Lint:</strong> <code>make lint</code> (requires golangci-lint)</li>
+<li><strong>Clean:</strong> <code>make clean</code></li>
+</ul>
+</article>
+                        </div>
+                        <div class="hidden text-sm xl:block">
+                            <div class="sticky top-20 -mt-6 pt-4">
+    <div class="no-scrollbar h-full overflow-auto pb-10">
+        <div class="space-y-2">
+            <p class="font-medium">On This Page</p>
+            <ul class="m-0 list-none">
+                
+                
+                
+                
+                <li class="mt-0 pt-2">
+                    <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                        href="#prerequisites">Prerequisites</a>
+                    
+                </li>
+                
+                <li class="mt-0 pt-2">
+                    <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                        href="#1-getting-the-backend-component">1. Getting the Backend Component</a>
+                    
+                    <ul class="m-0 list-none pl-4">
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#through-prebuilt-binaries">Through Prebuilt Binaries</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#for-linux-x86_64">For Linux x86_64</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#for-linux-arm64">For Linux ARM64</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#for-linux-armv7">For Linux ARMv7</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#through-github-source-code">Through GitHub Source Code</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li class="mt-0 pt-2">
+                    <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                        href="#2-configuration">2. Configuration</a>
+                    
+                </li>
+                
+                <li class="mt-0 pt-2">
+                    <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                        href="#3-database-setup">3. Database Setup</a>
+                    
+                    <ul class="m-0 list-none pl-4">
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#postgresql">PostgreSQL</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#redis">Redis</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li class="mt-0 pt-2">
+                    <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                        href="#4-build-only-for-users-with-source-code">4. Build (only for users with source code)</a>
+                    
+                    <ul class="m-0 list-none pl-4">
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#using-go">Using Go</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#using-makefile">Using Makefile</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#using-docker">Using Docker</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li class="mt-0 pt-2">
+                    <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                        href="#5-useful-commands">5. Useful Commands</a>
+                    
+                </li>
+                
+                
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+            <dialog id="bottom-sidebar" data-closing="0"
+    class="backdrop:bg-black backdrop:opacity-80 backdrop:transition-all backdrop:duration-500 text-foreground"
+    onclick="onBottomSidebarDialogClick(event)">
+    <div
+        class="fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background max-h-[60svh] p-0 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">
+        <div class="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted"></div>
+        <div class="overflow-auto p-6 space-y-3">
+            
+            
+
+            <div class="flex flex-col">
+                
+                
+                <a href="../.." class="text-base shrink-0">
+    Welcome to Linux ACL Management System
+</a>
+                
+                
+            </div>
+            
+
+            <div class="flex flex-col">
+                
+                <div class="flex flex-col space-y-3 pt-4">
+                    <h4 class="font-medium">Getting started </h4>
+                    
+                    <a href="../../00_getting_started/installation/" class="text-base shrink-0">
+    Requirements
+</a>
+                    
+                    <a href="../../00_getting_started/project_structure/" class="text-base shrink-0">
+    Project Structure
+</a>
+                    
+                </div>
+                
+            </div>
+            
+
+            <div class="flex flex-col">
+                
+                <div class="flex flex-col space-y-3 pt-4">
+                    <h4 class="font-medium">Backend component </h4>
+                    
+                    <a href="../architecture/" class="text-base shrink-0">
+    Backend Server Architecture
+</a>
+                    
+                    <a href="../changelog/" class="text-base shrink-0">
+    Changelog for Backend Server
+</a>
+                    
+                    <a href="../configuration/" class="text-base shrink-0">
+    Configuring the Backend Server
+</a>
+                    
+                    <a href="../deployment/" class="text-base shrink-0">
+    Deploying the Backend Server
+</a>
+                    
+                    <a href="../development/" class="text-base shrink-0">
+    Developing the Backend Server
+</a>
+                    
+                    <a href="./" class="text-base shrink-0">
+    Installing Backend Server
+</a>
+                    
+                    <a href="../quick_start/" class="text-base shrink-0">
+    Quick Start
+</a>
+                    
+                    <a href="../troubleshooting/" class="text-base shrink-0">
+    Troubleshooting the Backend Server
+</a>
+                    
+                </div>
+                
+            </div>
+            
+
+            <div class="flex flex-col">
+                
+                <div class="flex flex-col space-y-3 pt-4">
+                    <h4 class="font-medium">Daemon component </h4>
+                    
+                    <a href="../../02_daemon_component/architecture/" class="text-base shrink-0">
+    Daemons Architecture
+</a>
+                    
+                    <a href="../../02_daemon_component/changelog/" class="text-base shrink-0">
+    Changelog for Daemons
+</a>
+                    
+                    <a href="../../02_daemon_component/configuration/" class="text-base shrink-0">
+    Configuring the Daemons
+</a>
+                    
+                    <a href="../../02_daemon_component/deployment/" class="text-base shrink-0">
+    Deploying the Daemons
+</a>
+                    
+                    <a href="../../02_daemon_component/development/" class="text-base shrink-0">
+    Developing the Daemons
+</a>
+                    
+                    <a href="../../02_daemon_component/installation/" class="text-base shrink-0">
+    Installing File Server Daemons
+</a>
+                    
+                    <a href="../../02_daemon_component/quick_start/" class="text-base shrink-0">
+    Quick Start
+</a>
+                    
+                    <a href="../../02_daemon_component/troubleshooting/" class="text-base shrink-0">
+    Troubleshooting the Daemons
+</a>
+                    
+                </div>
+                
+            </div>
+            
+
+            <div class="flex flex-col">
+                
+                <div class="flex flex-col space-y-3 pt-4">
+                    <h4 class="font-medium">Frontend component </h4>
+                    
+                    <a href="../../03_frontend_component/architecture/" class="text-base shrink-0">
+    Frontend Architecture
+</a>
+                    
+                    <a href="../../03_frontend_component/changelog/" class="text-base shrink-0">
+    Changelog for Frontend Component
+</a>
+                    
+                    <a href="../../03_frontend_component/development/" class="text-base shrink-0">
+    Developing the Frontend Component
+</a>
+                    
+                    <a href="../../03_frontend_component/installation/" class="text-base shrink-0">
+    Installation
+</a>
+                    
+                    <a href="../../03_frontend_component/quick_start/" class="text-base shrink-0">
+    Quick Start
+</a>
+                    
+                    <a href="../../03_frontend_component/troubleshooting/" class="text-base shrink-0">
+    Troubleshooting the Frontend Server
+</a>
+                    
+                </div>
+                
+            </div>
+            
+            
+        </div>
+    </div>
+</dialog>
+        </div>
+    </div> 
+    
+    <script src="../../search/main.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.3.0/dist/iconify-icon.min.js"></script>
+    <script src="../../js/copy-button.js"></script>
+</body>
+
+</html>

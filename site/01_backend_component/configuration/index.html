@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // for search plugin notably
+        const base_url = "None";
+    </script>
+    <script>
+        const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+        darkTheme.onchange = (e) => {
+            if (e.matches) {
+                document.documentElement.classList.add("dark")
+                localStorage.theme = 'dark';
+            } else {
+                document.documentElement.classList.remove("dark")
+                localStorage.removeItem("theme")
+            }
+        };
+
+        // On page load. Priotiry to lcaolStorage
+        if (localStorage.theme === "dark") {
+            document.documentElement.classList.add("dark")
+        } else if (localStorage.theme === "light") {
+            document.documentElement.classList.remove("dark")
+        } else if (darkTheme.matches) {
+            document.documentElement.classList.add("dark")
+        } else {
+            document.documentElement.classList.remove("dark")
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Configuring the Backend Server - Vortex | Linux ACL Management System</title>
+    
+
+
+<title>Configuring the Backend Server</title>
+
+
+
+
+
+
+
+
+
+
+<!-- Open Graph (Facebook, LinkedIn) -->
+
+<meta property="og:title" content="Configuring the Backend Server">
+
+
+
+
+
+
+
+
+
+
+<!-- Twitter Card -->
+
+<meta name="twitter:title" content="Configuring the Backend Server">
+
+
+
+
+
+
+<!-- JSON-LD Structured Data -->
+
+
+
+    <link rel="icon" href="../../img/favicon.ico">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/geist.css" rel="stylesheet">
+    
+    <link href="../../css/pygments/dracula.css" rel="stylesheet">
+    
+
+    <script src="../../js/callbacks.js"></script>
+
+    
+
+    
+
+    
+
+</head>
+
+<body class="w-screen overflow-x-hidden bg-foreground md:bg-background text-foreground scroll-smooth m-0 p-0">
+    <div id="inner-body"
+        class="min-h-screen bg-background origin-[top_center_0px] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">
+        <header
+    class="border-grid sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div class="w-full mx-auto 3xl:max-w-8xl">
+        <div
+            class="xl:px-6 h-14 w-full max-w-8xl mx-auto px-4 border-x border-grid flex flex-row justify-between items-center">
+            <div class="mr-4 hidden md:flex">
+                <a href="/" class="mr-4 flex items-center gap-2 lg:mr-6">
+                    
+
+<iconify-icon icon="heroicons:cube" noobserver></iconify-icon>
+
+
+                    <h1 class="hidden lg:inline-block font-bold text-md">
+                        
+                        Vortex | Linux ACL Management System
+                        
+                    </h1>
+                </a>
+            </div>
+            <button
+                class="cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground py-2 -ml-2 mr-2 h-8 w-8 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R15u6ja:"
+                data-state="closed" onclick="onMobileMenuButtonClick(event)">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="!size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"></path>
+                </svg>
+                <span class="sr-only">Toggle Menu</span>
+            </button>
+            <div class="flex flex-1 items-center justify-between gap-2 md:justify-end">
+                <button onclick="onSearchBarClick(event)"
+    class="cursor-pointer inline-flex items-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 relative h-8 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64">
+    <span class="hidden lg:inline-flex">Search documentation...</span>
+    <span class="inline-flex lg:hidden">Search...</span>
+    <kbd
+        class="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+        <span class="text-xs">⌘</span>K
+    </kbd>
+</button>
+<dialog id="search-dialog" onclick="onSearchDialogClick(event)"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg border overflow-hidden p-0">
+    <div class="w-lg gap-4">
+        <div class="flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground">
+            <div class="w-full flex items-center border-b px-3" cmdk-input-wrapper="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="mr-2 h-4 w-4 shrink-0 opacity-50">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <!-- <script>
+                    let debounceTimer;
+                    const onInputHandler = function (event) {
+                        const query = event.target.value;
+                        clearTimeout(debounceTimer);
+                        debounceTimer = setTimeout(() => {
+                            if (searchWorker && (query.length > 2)) {
+                                console.log(`Posting message { "query": "${query}" }`)
+                                // https://lunrjs.com/guides/searching.html
+                                // we should append a wilcard and also a boost on exact term
+                                const lunrQuery = `${query}^10 ${query}* ${query}~1`;
+                                searchWorker.postMessage({ "query": lunrQuery });
+                            } else if (query.length > 2) {
+                                console.warn("searchWorker is not defined")
+                            } else {
+                                const results = document.getElementById("mkdocs-search-results");
+                                if (results) {
+                                    while (results.firstChild) {
+                                        results.removeChild(results.firstChild);
+                                    }
+                                }
+                            }
+                        }, 300);
+                    };
+                </script> -->
+                <input
+                    class="flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Type a command or search..." autocomplete="off" autocorrect="off" spellcheck="false"
+                    aria-autocomplete="list" role="combobox" aria-expanded="true" type="text" value=""
+                    oninput="onInputHandler(event)">
+            </div>
+        </div>
+        <div id="mkdocs-search-results" class="max-h-[300px] overflow-y-auto overflow-x-hidden">
+            <!-- search results go there -->
+        </div>
+    </div>
+</dialog>
+<script>
+    document.removeEventListener("keydown", searchShortcutHandler);
+    document.addEventListener("keydown", searchShortcutHandler);
+</script>
+                <div class="flex items-center gap-0.5">
+                    
+                    <button
+                        class="cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground py-2 group/toggle h-8 w-8 px-0"
+                        onclick="onThemeSwitch(event)">
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round"
+    class="h-4 w-4 dark:hidden not-dark:block">
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+</svg>
+                        
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round"
+    class="h-4 w-4 not-dark:hidden dark:block">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2" />
+    <path d="M12 20v2" />
+    <path d="m4.93 4.93 1.41 1.41" />
+    <path d="m17.66 17.66 1.41 1.41" />
+    <path d="M2 12h2" />
+    <path d="M20 12h2" />
+    <path d="m6.34 17.66-1.41 1.41" />
+    <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+                        
+                        <span class="sr-only">Toggle theme</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="border-grid flex flex-1 flex-col">
+            <div class="w-full mx-auto 3xl:max-w-8xl">
+                <div
+                    class="px-4 w-full max-w-8xl mx-auto xl:px-6 flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
+                    <aside
+                        class="border-grid fixed top-14 z-30 hidden h-[calc(100vh-3.55rem)] w-full shrink-0 border-r md:sticky md:block">
+                        <div
+    class="no-scrollbar [&::-webkit-scrollbar]:hidden h-full overflow-auto py-6 pr-4 lg:py-8 flex flex-col gap-[.125rem]">
+    
+    
+    
+
+    
+    
+    <a href="../.." 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Welcome
+    
+
+    
+
+    
+
+    
+</a>
+    
+    
+
+
+    
+    
+    <div class="flex flex-col gap-1 mt-5 first:mt-0">
+        <h4 class="rounded-md px-2 py-1 text-sm font-semibold">Getting started</h4>
+        <div class="grid grid-flow-row auto-rows-max gap-[.125rem]">
+            
+            <a href="../../00_getting_started/project_structure/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Project Structure
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../00_getting_started/installation/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Requirements
+    
+
+    
+
+    
+
+    
+</a>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="flex flex-col gap-1 mt-5 first:mt-0">
+        <h4 class="rounded-md px-2 py-1 text-sm font-semibold">Backend component</h4>
+        <div class="grid grid-flow-row auto-rows-max gap-[.125rem]">
+            
+            <a href="../quick_start/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Quick Start
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../architecture/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Architecture
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../installation/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Installation
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="./" data-active 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Configuration
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../deployment/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Deployment
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../troubleshooting/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Troubleshooting
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../development/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Development
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../changelog/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Changelog
+    
+
+    
+
+    
+
+    
+</a>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="flex flex-col gap-1 mt-5 first:mt-0">
+        <h4 class="rounded-md px-2 py-1 text-sm font-semibold">Daemon component</h4>
+        <div class="grid grid-flow-row auto-rows-max gap-[.125rem]">
+            
+            <a href="../../02_daemon_component/quick_start/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Quick Start
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/architecture/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Architecture
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/installation/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Installation
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/configuration/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Configuration
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/deployment/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Deployment
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/troubleshooting/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Troubleshooting
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/development/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Development
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../02_daemon_component/changelog/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Changelog
+    
+
+    
+
+    
+
+    
+</a>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="flex flex-col gap-1 mt-5 first:mt-0">
+        <h4 class="rounded-md px-2 py-1 text-sm font-semibold">Frontend component</h4>
+        <div class="grid grid-flow-row auto-rows-max gap-[.125rem]">
+            
+            <a href="../../03_frontend_component/quick_start/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Quick Start
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../03_frontend_component/architecture/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Architecture
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../03_frontend_component/installation/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Installation
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../03_frontend_component/troubleshooting/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Troubleshooting
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../03_frontend_component/development/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Development
+    
+
+    
+
+    
+
+    
+</a>
+            
+            <a href="../../03_frontend_component/changelog/" 
+    class="text-sm flex shrink-0 h-8 w-full items-center rounded-lg px-2 text-foreground underline-offset-2 font-normal hover:bg-accent hover:text-accent-foreground data-active:bg-accent data-active:font-medium data-active:text-accent-foreground">
+    
+    Changelog
+    
+
+    
+
+    
+
+    
+</a>
+            
+        </div>
+    </div>
+    
+    
+    
+</div>
+                    </aside>
+                    <main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+                        <div class="mx-auto w-full min-w-0 xl:max-w-2xl">
+                            <article class="typography w-full">
+    
+    <div class="mb-4 flex items-center space-x-1 text-sm leading-none text-muted-foreground">
+    
+
+
+<span class="truncate">Backend component</span>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right h-3.5 w-3.5">
+    <path d="m9 18 6-6-6-6"></path>
+</svg>
+<div class="text-foreground">Configuring the Backend Server</div>
+
+</div>
+    
+    
+    <h1 class="tracking-tight">Configuring the Backend Server</h1>
+    
+    
+    <p class="summary">
+        Configuring the backend server in the Linux ACL Management System
+    </p>
+    
+    <div class="admonition info">
+<p class="admonition-title">Note:</p>
+<p>You don't need to configure all the parameters in <code>config.yaml</code>. Essential parameters are required and the service will error if they are missing. All other parameters fall back to sensible defaults. Order of the configs doesn't matter.</p>
+</div>
+<p><br></p>
+<h1 id="backend-configuration-reference">Backend Configuration Reference<a class="headerlink" href="#backend-configuration-reference" title="Permanent link">&para;</a></h1>
+<p>This document explains all the available configuration options for the backend service.
+Use this as a reference when editing your <code>config.yaml</code> and <code>.env</code>.</p>
+<h2 id="app">App<a class="headerlink" href="#app" title="Permanent link">&para;</a></h2>
+<p>General application settings.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Name of the application. Default: <code>laclm</code>.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Current version of the application. Default: <code>v1.1</code>.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>debug_mode</code></td>
+<td>Whether to run in debug mode (shows more logs, verbose errors). Default: <code>false</code>.</td>
+<td><code>bool</code></td>
+</tr>
+<tr>
+<td><code>session_timeout</code></td>
+<td>User session timeout in hours. Default: <code>24</code>.</td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>base_path</code></td>
+<td>Base path for mounted storage or working directory. Required.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>max_workers</code></td>
+<td>Maximum number of concurrent worker processes. <code>0</code> lets the scheduler decide.</td>
+<td><code>int</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="server">Server<a class="headerlink" href="#server" title="Permanent link">&para;</a></h2>
+<p>Backend server deployment settings.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host</code></td>
+<td>The host address the server binds to. Default: <code>localhost</code>. Use <code>0.0.0.0</code> to bind to all interfaces.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>port</code></td>
+<td>The port on which the backend server runs. Default: <code>8080</code>.</td>
+<td><code>int</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="database">Database<a class="headerlink" href="#database" title="Permanent link">&para;</a></h2>
+<p>Settings for databases and caching services.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Subkey</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>transaction_log_redis.address</code></td>
+<td></td>
+<td>Redis address for transaction logging. Required.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>transaction_log_redis.password</code></td>
+<td></td>
+<td>Password for the Redis instance (read from env). Optional.</td>
+<td><code>env</code></td>
+</tr>
+<tr>
+<td><code>transaction_log_redis.db</code></td>
+<td></td>
+<td>Redis database index. Default: <code>0</code>.</td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>archival_postgres.host</code></td>
+<td></td>
+<td>Hostname of the PostgreSQL server. Default: <code>localhost</code>.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>archival_postgres.port</code></td>
+<td></td>
+<td>PostgreSQL server port. Default: <code>5432</code>.</td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>archival_postgres.user</code></td>
+<td></td>
+<td>Username for PostgreSQL. Required.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>archival_postgres.password</code></td>
+<td></td>
+<td>Password for PostgreSQL (can be read from env). Optional but recommended.</td>
+<td><code>string/env</code></td>
+</tr>
+<tr>
+<td><code>archival_postgres.dbname</code></td>
+<td></td>
+<td>Name of the PostgreSQL database. Required.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>archival_postgres.sslmode</code></td>
+<td></td>
+<td>SSL mode for PostgreSQL connection. Default: <code>disable</code>.</td>
+<td><code>string</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h2>
+<p>Logging output settings for the backend service.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>Path to the log file. Default: <code>log/app.log</code>.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>max_size</code></td>
+<td>Maximum size of a single log file (in MB) before rotation. Default: <code>100</code>.</td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>max_backups</code></td>
+<td>Maximum number of old log files to keep. Default: <code>3</code>.</td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>max_age</code></td>
+<td>Maximum number of days to keep old log files.</td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>compress</code></td>
+<td>Whether to compress rotated log files. Default: <code>false</code>.</td>
+<td><code>bool</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="filesystem-servers">Filesystem Servers<a class="headerlink" href="#filesystem-servers" title="Permanent link">&para;</a></h2>
+<p>List of managed filesystem servers.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Subkey</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
+<td></td>
+<td>Local path or mount point for the filesystem. Required.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td></td>
+<td>Connection method: <code>local</code> (default) or <code>remote</code>.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>remote.host</code></td>
+<td></td>
+<td>Remote server host address. Required when <code>method</code> is <code>remote</code>.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>remote.port</code></td>
+<td></td>
+<td>Remote server port. Required when <code>method</code> is <code>remote</code>.</td>
+<td><code>int</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
+<p>Settings for authentication (LDAP).</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Subkey</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ldap.tls</code></td>
+<td></td>
+<td>Whether to use TLS for LDAP connection. Default: <code>false</code>.</td>
+<td><code>bool</code></td>
+</tr>
+<tr>
+<td><code>ldap.address</code></td>
+<td></td>
+<td>LDAP server address. Required.</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>ldap.admin_dn</code></td>
+<td></td>
+<td>LDAP admin DN (read from env). Required.</td>
+<td><code>env</code></td>
+</tr>
+<tr>
+<td><code>ldap.admin_password</code></td>
+<td></td>
+<td>LDAP admin password (read from env). Required.</td>
+<td><code>env</code></td>
+</tr>
+<tr>
+<td><code>ldap.search_base</code></td>
+<td></td>
+<td>LDAP search base DN. Required.</td>
+<td><code>string</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="backend-security">Backend Security<a class="headerlink" href="#backend-security" title="Permanent link">&para;</a></h2>
+<p>Security-related settings for tokens and sessions.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>jwt_secret_token</code></td>
+<td>Secret token used to sign JWTs (read from env). Required.</td>
+<td><code>env</code></td>
+</tr>
+<tr>
+<td><code>jwt_expiry</code></td>
+<td>JWT expiration time in hours. Default: <code>24</code>.</td>
+<td><code>int</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="default-configuration-file">Default Configuration File<a class="headerlink" href="#default-configuration-file" title="Permanent link">&para;</a></h2>
+<p>Here is a backend configuration aligned with the repository's <code>backend/config.yaml</code> that works in development mode.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># backend environment configs</span>
+<span class="nt">app</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">laclm</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.1</span>
+<span class="w">  </span><span class="nt">debug_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">session_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">base_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/mnt</span>
+<span class="w">  </span><span class="nt">max_workers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+
+<span class="c1"># backend server deployment configs</span>
+<span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+
+<span class="c1"># databases for operations</span>
+<span class="nt">database</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">transaction_log_redis</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost:6379</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${LACLM_TRANS_REDIS_PASSWORD}</span>
+<span class="w">    </span><span class="nt">db</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">archival_postgres</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
+<span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${PG_PASSWORD}</span>
+<span class="w">    </span><span class="nt">dbname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="w">    </span><span class="nt">sslmode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">disable</span>
+
+<span class="c1"># logging configurations</span>
+<span class="nt">logging</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">logs/app.log</span>
+<span class="w">  </span><span class="nt">max_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="w">  </span><span class="nt">max_backups</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">  </span><span class="nt">max_age</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">  </span><span class="nt">compress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="c1"># filesystem servers that need management</span>
+<span class="nt">filesystem_servers</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/nfs-system</span>
+<span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">remote</span>
+<span class="w">    </span><span class="nt">remote</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span><span class="w"> </span>
+<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6593</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/beegfs-system</span>
+<span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+
+<span class="c1"># authentication information</span>
+<span class="nt">authentication</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ldap</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tls</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ldap://localhost:389&quot;</span>
+<span class="w">    </span><span class="nt">admin_dn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${LACLM_LDAP_ADMIN_DN}</span>
+<span class="w">    </span><span class="nt">admin_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${LACLM_LDAP_ADMIN_PASSWORD}</span>
+<span class="w">    </span><span class="nt">search_base</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cn=Princeton</span><span class="nv"> </span><span class="s">Plainsboro</span><span class="nv"> </span><span class="s">Hospital</span><span class="nv"> </span><span class="s">,dc=myorg,dc=local&quot;</span>
+
+<span class="nt">backend_security</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">jwt_secret_token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JWT_SECRET_TOKEN}</span>
+<span class="w">  </span><span class="nt">jwt_expiry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</code></pre></div>
+
+<p><br></p>
+<h1 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h1>
+<p>Given below is the environment variables file structure which contains server specific information and must be protected.</p>
+<div class="codehilite"><pre><span></span><code><span class="gh">#</span> Password for Redis Database 
+LACLM_TRANS_REDIS_PASSWORD=
+
+<span class="gh">#</span> LDAP Admin DN
+LACLM_LDAP_ADMIN_DN=
+
+<span class="gh">#</span> LDAP ADMIN PASSWORD
+LACLM_LDAP_ADMIN_PASSWORD=
+
+<span class="gh">#</span> PostgreSQL password (if used in config.yaml)
+PG_PASSWORD=
+
+<span class="gh">#</span> JWT Secret Token
+JWT_SECRET_TOKEN=
+</code></pre></div>
+
+<div class="admonition info">
+<p class="admonition-title">Note:</p>
+<p>The configuration mechanism is designed to make the setup replicable. You can write <code>config.yaml</code> once and use it to deploy multiple backends in similar environments. <code>.env</code> is intended to be server-specific and needs to be modified each time. This allows users to set up multiple servers with minimal config changes.</p>
+</div>
+</article>
+                        </div>
+                        <div class="hidden text-sm xl:block">
+                            <div class="sticky top-20 -mt-6 pt-4">
+    <div class="no-scrollbar h-full overflow-auto pb-10">
+        <div class="space-y-2">
+            <p class="font-medium">On This Page</p>
+            <ul class="m-0 list-none">
+                
+                
+                
+                
+                <li class="mt-0 pt-2">
+                    <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                        href="#backend-configuration-reference">Backend Configuration Reference</a>
+                    
+                    <ul class="m-0 list-none pl-4">
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#app">App</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#server">Server</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#database">Database</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#logging">Logging</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#filesystem-servers">Filesystem Servers</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#authentication">Authentication</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#backend-security">Backend Security</a>
+                        </li>
+                        
+                        <li class="mt-0 pt-2">
+                            <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                                href="#default-configuration-file">Default Configuration File</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li class="mt-0 pt-2">
+                    <a class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                        href="#environment-variables">Environment Variables</a>
+                    
+                </li>
+                
+                
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+            <dialog id="bottom-sidebar" data-closing="0"
+    class="backdrop:bg-black backdrop:opacity-80 backdrop:transition-all backdrop:duration-500 text-foreground"
+    onclick="onBottomSidebarDialogClick(event)">
+    <div
+        class="fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background max-h-[60svh] p-0 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">
+        <div class="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted"></div>
+        <div class="overflow-auto p-6 space-y-3">
+            
+            
+
+            <div class="flex flex-col">
+                
+                
+                <a href="../.." class="text-base shrink-0">
+    Welcome to Linux ACL Management System
+</a>
+                
+                
+            </div>
+            
+
+            <div class="flex flex-col">
+                
+                <div class="flex flex-col space-y-3 pt-4">
+                    <h4 class="font-medium">Getting started </h4>
+                    
+                    <a href="../../00_getting_started/installation/" class="text-base shrink-0">
+    Requirements
+</a>
+                    
+                    <a href="../../00_getting_started/project_structure/" class="text-base shrink-0">
+    Project Structure
+</a>
+                    
+                </div>
+                
+            </div>
+            
+
+            <div class="flex flex-col">
+                
+                <div class="flex flex-col space-y-3 pt-4">
+                    <h4 class="font-medium">Backend component </h4>
+                    
+                    <a href="../architecture/" class="text-base shrink-0">
+    Backend Server Architecture
+</a>
+                    
+                    <a href="../changelog/" class="text-base shrink-0">
+    Changelog for Backend Server
+</a>
+                    
+                    <a href="./" class="text-base shrink-0">
+    Configuring the Backend Server
+</a>
+                    
+                    <a href="../deployment/" class="text-base shrink-0">
+    Deploying the Backend Server
+</a>
+                    
+                    <a href="../development/" class="text-base shrink-0">
+    Developing the Backend Server
+</a>
+                    
+                    <a href="../installation/" class="text-base shrink-0">
+    Installing Backend Server
+</a>
+                    
+                    <a href="../quick_start/" class="text-base shrink-0">
+    Quick Start
+</a>
+                    
+                    <a href="../troubleshooting/" class="text-base shrink-0">
+    Troubleshooting the Backend Server
+</a>
+                    
+                </div>
+                
+            </div>
+            
+
+            <div class="flex flex-col">
+                
+                <div class="flex flex-col space-y-3 pt-4">
+                    <h4 class="font-medium">Daemon component </h4>
+                    
+                    <a href="../../02_daemon_component/architecture/" class="text-base shrink-0">
+    Daemons Architecture
+</a>
+                    
+                    <a href="../../02_daemon_component/changelog/" class="text-base shrink-0">
+    Changelog for Daemons
+</a>
+                    
+                    <a href="../../02_daemon_component/configuration/" class="text-base shrink-0">
+    Configuring the Daemons
+</a>
+                    
+                    <a href="../../02_daemon_component/deployment/" class="text-base shrink-0">
+    Deploying the Daemons
+</a>
+                    
+                    <a href="../../02_daemon_component/development/" class="text-base shrink-0">
+    Developing the Daemons
+</a>
+                    
+                    <a href="../../02_daemon_component/installation/" class="text-base shrink-0">
+    Installing File Server Daemons
+</a>
+                    
+                    <a href="../../02_daemon_component/quick_start/" class="text-base shrink-0">
+    Quick Start
+</a>
+                    
+                    <a href="../../02_daemon_component/troubleshooting/" class="text-base shrink-0">
+    Troubleshooting the Daemons
+</a>
+                    
+                </div>
+                
+            </div>
+            
+
+            <div class="flex flex-col">
+                
+                <div class="flex flex-col space-y-3 pt-4">
+                    <h4 class="font-medium">Frontend component </h4>
+                    
+                    <a href="../../03_frontend_component/architecture/" class="text-base shrink-0">
+    Frontend Architecture
+</a>
+                    
+                    <a href="../../03_frontend_component/changelog/" class="text-base shrink-0">
+    Changelog for Frontend Component
+</a>
+                    
+                    <a href="../../03_frontend_component/development/" class="text-base shrink-0">
+    Developing the Frontend Component
+</a>
+                    
+                    <a href="../../03_frontend_component/installation/" class="text-base shrink-0">
+    Installation
+</a>
+                    
+                    <a href="../../03_frontend_component/quick_start/" class="text-base shrink-0">
+    Quick Start
+</a>
+                    
+                    <a href="../../03_frontend_component/troubleshooting/" class="text-base shrink-0">
+    Troubleshooting the Frontend Server
+</a>
+                    
+                </div>
+                
+            </div>
+            
+            
+        </div>
+    </div>
+</dialog>
+        </div>
+    </div> 
+    
+    <script src="../../search/main.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.3.0/dist/iconify-icon.min.js"></script>
+    <script src="../../js/copy-button.js"></script>
+</body>
+
+</html>
