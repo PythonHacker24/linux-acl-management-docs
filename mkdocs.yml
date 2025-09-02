@@ -14,3 +14,34 @@ markdown_extensions:
   - codehilite
   - toc:
       permalink: true
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: 00_getting_started/installation.md
+      - Project Structure: 00_getting_started/project_structure.md
+  - Backend Component:
+      - Architecture: 01_backend_component/architecture.md
+      - Installation: 01_backend_component/installation.md
+      - Quick Start: 01_backend_component/quick_start.md
+      - Configuration: 01_backend_component/configuration.md
+      - Development: 01_backend_component/development.md
+      - Deployment: 01_backend_component/deployment.md
+      - Troubleshooting: 01_backend_component/troubleshooting.md
+      - Changelog: 01_backend_component/changelog.md
+  - Daemon Component:
+      - Architecture: 02_daemon_component/architecture.md
+      - Installation: 02_daemon_component/installation.md
+      - Quick Start: 02_daemon_component/quick_start.md
+      - Configuration: 02_daemon_component/configuration.md
+      - Development: 02_daemon_component/development.md
+      - Deployment: 02_daemon_component/deployment.md
+      - Troubleshooting: 02_daemon_component/troubleshooting.md
+      - Changelog: 02_daemon_component/changelog.md
+  - Frontend Component:
+      - Architecture: 03_frontend_component/architecture.md
+      - Installation: 03_frontend_component/installation.md
+      - Quick Start: 03_frontend_component/quick_start.md
+      - Development: 03_frontend_component/development.md
+      - Troubleshooting: 03_frontend_component/troubleshooting.md
+      - Changelog: 03_frontend_component/changelog.md
