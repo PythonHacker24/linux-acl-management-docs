@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Architecture - Vortex | Linux ACL Management System</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Architecture";
+        var mkdocs_page_input_path = "02_daemon_component/architecture.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vortex | Linux ACL Management System
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_getting_started/project_structure/">Project Structure</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Backend Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/deployment/">Deployment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Daemon Component</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Architecture</a>
+    <ul class="current">
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../deployment/">Deployment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../changelog/">Changelog</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Frontend Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vortex | Linux ACL Management System</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Daemon Component</li>
+      <li class="breadcrumb-item active">Architecture</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><br></p>
+<h1 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h1>
+<p>When we talk about the daemon component, we consider 2 daemons working together: <code>aclapi</code> and <code>aclcore</code>.</p>
+<p>A top level architecture of daemon component has been visualized below.</p>
+<p><img alt="" src="../../img/daemon-arch.svg" /></p>
+<p>The <code>aclapi</code> exposes a gRPC handler which the backend component uses to communicate with it. The data that recieved through this is deserialized and sent to <code>aclcore</code> via Unix sockets. <code>aclcore</code> takes the instruction and executes it on the system via <code>setfacl</code>.</p>
+<p><br></p>
+<h1 id="acl-api-grpc-schema">ACL API gRPC Schema<a class="headerlink" href="#acl-api-grpc-schema" title="Permanent link">&para;</a></h1>
+<p>You can find the protobuf files for <code>aclapi</code> in the source code <a href="https://github.com/PythonHacker24/linux-acl-management-aclapi/tree/main/internal/grpcserver/protos">here</a>.</p>
+<h3 id="1-acl-grpc-service">1. ACL gRPC Service<a class="headerlink" href="#1-acl-grpc-service" title="Permanent link">&para;</a></h3>
+<p>This section describes the <strong>ACLService</strong> defined in <code>acl.proto</code> for managing Linux Access Control Lists (ACLs) via gRPC.</p>
+<p>The <strong>ACLService</strong> provides an RPC method to apply ACL entries to files or directories.</p>
+<h4 id="rpc-method-for-aclservice">RPC Method for ACLService<a class="headerlink" href="#rpc-method-for-aclservice" title="Permanent link">&para;</a></h4>
+<pre class="codehilite"><code class="language-proto">rpc ApplyACLEntry (ApplyACLRequest) returns (ApplyACLResponse);
+</code></pre>
+
+<h4 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h4>
+<p>Applies an ACL entry (add, modify, or remove) to a given file or directory.</p>
+<h4 id="messages">Messages<a class="headerlink" href="#messages" title="Permanent link">&para;</a></h4>
+<p><strong>ACLEntry</strong> represents a single ACL Entry:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Type of the entity: <code>"user"</code>, <code>"group"</code>, <code>"mask"</code>, or <code>"other"</code>.</td>
+</tr>
+<tr>
+<td><code>entity</code></td>
+<td><code>string</code></td>
+<td>Name of the user or group. Can be empty for <code>"other"</code> or <code>"mask"</code>.</td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td><code>string</code></td>
+<td>Permissions in symbolic format, e.g., <code>"rw-"</code>.</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td><code>string</code></td>
+<td>Operation to perform: <code>"add"</code>, <code>"modify"</code>, or <code>"remove"</code>.</td>
+</tr>
+<tr>
+<td><code>is_default</code></td>
+<td><code>bool</code></td>
+<td>Whether this entry is for the default ACL (<code>true</code> or <code>false</code>).</td>
+</tr>
+</tbody>
+</table>
+<h4 id="applyaclrequest"><code>ApplyACLRequest</code><a class="headerlink" href="#applyaclrequest" title="Permanent link">&para;</a></h4>
+<p>Request message for <code>ApplyACLEntry</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>transactionID</code></td>
+<td><code>string</code></td>
+<td>Unique ID for tracking this request.</td>
+</tr>
+<tr>
+<td><code>target_path</code></td>
+<td><code>string</code></td>
+<td>Path to the file or directory to apply the ACL to.</td>
+</tr>
+<tr>
+<td><code>entry</code></td>
+<td><code>ACLEntry</code></td>
+<td>The ACL entry to apply.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="applyaclresponse">ApplyACLResponse<a class="headerlink" href="#applyaclresponse" title="Permanent link">&para;</a></h4>
+<p>Response message for <code>ApplyACLEntry</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>success</code></td>
+<td><code>bool</code></td>
+<td>Indicates whether the operation was successful.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>Additional information or error message.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h4>
+<p>Below is an example of how a client might call the <code>ApplyACLEntry</code> RPC:</p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;transactionID&quot;: &quot;abc123&quot;,
+  &quot;target_path&quot;: &quot;/home/alice/docs&quot;,
+  &quot;entry&quot;: {
+    &quot;entity_type&quot;: &quot;user&quot;,
+    &quot;entity&quot;: &quot;alice&quot;,
+    &quot;permissions&quot;: &quot;rw-&quot;,
+    &quot;action&quot;: &quot;add&quot;,
+    &quot;is_default&quot;: false
+  }
+}
+</code></pre>
+
+<p>The response might look like:</p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;success&quot;: true,
+  &quot;message&quot;: &quot;ACL entry added successfully.&quot;
+}
+</code></pre>
+
+<h3 id="2-ping-grpc-service">2. Ping gRPC Service<a class="headerlink" href="#2-ping-grpc-service" title="Permanent link">&para;</a></h3>
+<p>The <code>PingService</code> provides a simple RPC to check if the server is reachable.</p>
+<h4 id="rpc-method-for-pingservice">RPC Method for PingService<a class="headerlink" href="#rpc-method-for-pingservice" title="Permanent link">&para;</a></h4>
+<pre class="codehilite"><code class="language-proto">rpc Ping (PingRequest) returns (PingResponse);
+</code></pre>
+
+<h4 id="description_1">Description<a class="headerlink" href="#description_1" title="Permanent link">&para;</a></h4>
+<p>Sends a simple ping request to the server and expects a response message.</p>
+<h4 id="messages_1">Messages<a class="headerlink" href="#messages_1" title="Permanent link">&para;</a></h4>
+<p><strong>Ping Request</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>(empty)</em></td>
+<td><em>(empty)</em></td>
+<td>This message has no fields.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ping Response</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>The server’s response message, e.g., <code>"pong"</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-usage_1">Example Usage<a class="headerlink" href="#example-usage_1" title="Permanent link">&para;</a></h4>
+<p><strong>Request</strong></p>
+<pre class="codehilite"><code class="language-json">{}
+</code></pre>
+
+<p><strong>Response might look like</strong></p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;message&quot;: &quot;pong&quot;
+}
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../01_backend_component/changelog/" class="btn btn-neutral float-left" title="Changelog"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../installation/" class="btn btn-neutral float-right" title="Installation">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../01_backend_component/changelog/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../installation/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

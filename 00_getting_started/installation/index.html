@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Installation - Vortex | Linux ACL Management System</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Installation";
+        var mkdocs_page_input_path = "00_getting_started/installation.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vortex | Linux ACL Management System
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Installation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#backend-component">Backend Component</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#operating-system">Operating System</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hardware">Hardware</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#software-dependencies">Software Dependencies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#network-ports">Network &amp; Ports</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#filesystem">Filesystem</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#environment-variables">Environment Variables</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-docker-compose">Optional: Docker Compose</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#acl-api-daemon">ACL API Daemon</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#operating-system_1">Operating System</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hardware_1">Hardware</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#software">Software</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#software_1">Software</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#development-tools-recommendations">Development Tools (Recommendations)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#other">Other</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#acl-core-daemon">ACL Core Daemon</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#operating-system_2">Operating System</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hardware_2">Hardware</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#software_2">Software</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configuration_1">Configuration</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#software_3">Software</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#development-tools-recommendations_1">Development Tools (Recommendations)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#other_1">Other</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#additional-guidelines-for-daemons">Additional Guidelines for Daemons</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../project_structure/">Project Structure</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Backend Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/deployment/">Deployment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Daemon Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/deployment/">Deployment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Frontend Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vortex | Linux ACL Management System</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Getting Started</li>
+      <li class="breadcrumb-item active">Installation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="admonition warning">
+<p class="admonition-title">Warning:</p>
+<p>Project is <strong>under development</strong> and requirements might change frequently! Given requirements are based on experience of developers and calculations. More accurate requirements will be listed as the project is adopted more.</p>
+</div>
+<p><br></p>
+<h1 id="system-requirements">System Requirements<a class="headerlink" href="#system-requirements" title="Permanent link">&para;</a></h1>
+<h2 id="backend-component">Backend Component<a class="headerlink" href="#backend-component" title="Permanent link">&para;</a></h2>
+<p>To run the Linux ACL Management Backend, ensure your system meets the following requirements and has the necessary dependencies installed.</p>
+<h3 id="operating-system">Operating System<a class="headerlink" href="#operating-system" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Linux (recommended for production)</li>
+<li>macOS and Windows (for development/testing; some features may require adaptation)</li>
+</ul>
+<h3 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Minimum:</strong> 2 CPU cores, 2GB RAM (for development/testing)</li>
+<li><strong>Recommended:</strong> 4+ CPU cores, 8GB+ RAM (for production, especially with large organizations or many users)</li>
+</ul>
+<h3 id="software-dependencies">Software Dependencies<a class="headerlink" href="#software-dependencies" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Go (Golang)</strong>
+Version: 1.20 or higher (Go 1.24.x recommended)
+Used to build and run the backend application.</p>
+</li>
+<li>
+<p><strong>Redis</strong>
+Used for transaction logging and session management.
+Version: 6.x or higher recommended.</p>
+</li>
+<li>
+<p><strong>PostgreSQL</strong>
+Used for archival and persistent storage of transaction data.
+Version: 13.x or higher recommended.</p>
+</li>
+<li>
+<p><strong>LDAP (OpenLDAP is used for testing)</strong>
+Required for authentication and user management.
+Version: Any recent stable version.</p>
+</li>
+<li>
+<p><strong>Docker (optional for development purposes)</strong>
+For running the application and dependencies in containers.
+Version: 20.x or higher.</p>
+</li>
+<li>
+<p><strong>Docker Compose (optional for development purposes)</strong>
+For orchestrating multi-container setups (app, Redis, OpenLDAP, etc.).
+Version: 1.29+ or Docker Compose V2.</p>
+</li>
+<li>
+<p><strong>Bash &amp; ACL utilities</strong>
+bash: Required in the container for scripting.
+acl: Required for manipulating Access Control Lists on Linux filesystems.</p>
+</li>
+<li>
+<p><strong>Other Tools (for development)</strong></p>
+<ul>
+<li><strong>make:</strong> For building the project using the provided Makefile.</li>
+<li><strong>jq:</strong> For parsing JSON in test scripts.</li>
+<li><strong>curl:</strong> For API testing.</li>
+</ul>
+</li>
+</ul>
+<h3 id="network-ports">Network &amp; Ports<a class="headerlink" href="#network-ports" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>8080/tcp:</strong> Default API server port</li>
+<li><strong>389/tcp, 636/tcp:</strong> OpenLDAP</li>
+<li><strong>6379/tcp:</strong> Redis</li>
+<li><strong>5432/tcp:</strong> PostgreSQL</li>
+<li><strong>8090/tcp:</strong> phpLDAPadmin (optional, for LDAP management UI)</li>
+</ul>
+<h3 id="filesystem">Filesystem<a class="headerlink" href="#filesystem" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Access to the target filesystems (e.g., NFS, BeeGFS) is required for ACL management.</li>
+<li>Ensure the backend has the necessary permissions to modify ACLs on the managed paths.</li>
+</ul>
+<h3 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h3>
+<p>Sensitive configuration (e.g., Redis password, LDAP admin DN/password, JWT secret) should be provided via environment variables or a .env file.</p>
+<h3 id="optional-docker-compose">Optional: Docker Compose<a class="headerlink" href="#optional-docker-compose" title="Permanent link">&para;</a></h3>
+<p>For advanced testing, a BeeGFS/NFS environment can be spun up using the provided docker-compose.beegfs.yaml.</p>
+<div class="admonition info">
+<p class="admonition-title">Information:</p>
+<p>Advanced playground with Docker Compose is under development for learning/development purposes</p>
+</div>
+<h2 id="acl-api-daemon">ACL API Daemon<a class="headerlink" href="#acl-api-daemon" title="Permanent link">&para;</a></h2>
+<p>To run the Linux ACL Management API Daemon, ensure your system meets the following requirements and has the necessary dependencies installed. Following are the requirements for <strong>production mode</strong>.</p>
+<h3 id="operating-system_1">Operating System<a class="headerlink" href="#operating-system_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Linux (recommended for production)</li>
+</ul>
+<h3 id="hardware_1">Hardware<a class="headerlink" href="#hardware_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>CPU:</strong> 1+ core (x86_64/ARM64)</li>
+<li><strong>RAM:</strong> 256MB minimum (512MB+ recommended)</li>
+<li><strong>Disk:</strong> 50MB free space (for binary, logs, and config)</li>
+</ul>
+<h3 id="software">Software<a class="headerlink" href="#software" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Systemd or compatible init system (for running as a service)</li>
+<li>OpenSSL (for TLS, if enabled)</li>
+<li>Network access to host gRPC server (for communication with backend)</li>
+</ul>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>aclapi.yaml</code> configuration file (must be present and properly configured)</li>
+<li>Certificates in cert/ directory (if using TLS)</li>
+<li>Proper permissions for log and config directories</li>
+</ul>
+<hr />
+<p>Following are the requirements for <strong>development mode</strong>.</p>
+<h3 id="software_1">Software<a class="headerlink" href="#software_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Go 1.20+ (see go.mod for exact version)</li>
+<li>Make (for using provided Makefile)</li>
+<li>Git (for source control)</li>
+</ul>
+<h3 id="development-tools-recommendations">Development Tools (Recommendations)<a class="headerlink" href="#development-tools-recommendations" title="Permanent link">&para;</a></h3>
+<ul>
+<li>golangci-lint (for linting)</li>
+<li>go test (for running tests)</li>
+<li>Any editor/IDE with Go support</li>
+</ul>
+<h3 id="other">Other<a class="headerlink" href="#other" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Access to test certificates (for local TLS testing)</li>
+<li>Sample configuration files (provided with the code in the official repository)</li>
+</ul>
+<h2 id="acl-core-daemon">ACL Core Daemon<a class="headerlink" href="#acl-core-daemon" title="Permanent link">&para;</a></h2>
+<p>To run the Linux ACL Management Core Daemon, ensure your system meets the following requirements and has the necessary dependencies installed. Following are the requirements for <strong>production mode</strong>.</p>
+<h3 id="operating-system_2">Operating System<a class="headerlink" href="#operating-system_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Linux (recommended for production)</li>
+</ul>
+<h3 id="hardware_2">Hardware<a class="headerlink" href="#hardware_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>CPU:</strong> 1+ core (x86_64/ARM64)</li>
+<li><strong>RAM:</strong> 256MB minimum (512MB+ recommended)</li>
+<li><strong>Disk:</strong> 50MB free space (for binary, logs, and config)</li>
+</ul>
+<h3 id="software_2">Software<a class="headerlink" href="#software_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Systemd or compatible init system (for running as a service)</li>
+<li>Adequate permissions to change ACL permissions on behalf of root/users</li>
+</ul>
+<h3 id="configuration_1">Configuration<a class="headerlink" href="#configuration_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>aclcore.yaml</code> configuration file (must be present and properly configured)</li>
+<li>Proper permissions for log and config directories</li>
+</ul>
+<hr />
+<p>Following are the requirements for <strong>development mode</strong>.</p>
+<h3 id="software_3">Software<a class="headerlink" href="#software_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Go 1.20+ (see go.mod for exact version)</li>
+<li>Make (for using provided Makefile)</li>
+<li>Git (for source control)</li>
+</ul>
+<h3 id="development-tools-recommendations_1">Development Tools (Recommendations)<a class="headerlink" href="#development-tools-recommendations_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>golangci-lint (for linting)</li>
+<li>go test (for running tests)</li>
+<li>Any editor/IDE with Go support</li>
+</ul>
+<h3 id="other_1">Other<a class="headerlink" href="#other_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Access to test certificates (for local TLS testing)</li>
+<li>Sample configuration files (provided with the code in the official repository)</li>
+</ul>
+<h2 id="additional-guidelines-for-daemons">Additional Guidelines for Daemons<a class="headerlink" href="#additional-guidelines-for-daemons" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Both daemons are designed to be run as background services (systemd unit files are provided).</li>
+<li>For production, ensure proper firewall and security settings.</li>
+<li>For development, you may need to install additional Go tools as specified in the Makefile or README.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Note:</p>
+<p>The API and Core daemons are highly dependent on each other to complete the their purpose as permission modification daemons. It's a good practice to deploy them together for better configuration.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../.." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../project_structure/" class="btn btn-neutral float-right" title="Project Structure">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../.." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../project_structure/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

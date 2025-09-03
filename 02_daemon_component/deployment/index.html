@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Deployment - Vortex | Linux ACL Management System</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Deployment";
+        var mkdocs_page_input_path = "02_daemon_component/deployment.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vortex | Linux ACL Management System
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_getting_started/project_structure/">Project Structure</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Backend Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/deployment/">Deployment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Daemon Component</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../development/">Development</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Deployment</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#deploying-via-source-code">Deploying via Source Code</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-install-the-source-code-tarball">1. Install the Source Code Tarball</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#linux-amd64-architecture">Linux AMD64 Architecture</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#linux-arm64-architecture">Linux ARM64 Architecture¶</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-extract-the-source-code-tarball">2. Extract the Source Code Tarball</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-build-locally">3. Build Locally</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#deploying-via-prebuilt-binaries">Deploying via Prebuilt Binaries</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#linux-amd64-architecture_1">Linux AMD64 Architecture</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linux-arm64-architecture_1">Linux ARM64 Architecture¶</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#complete-daemon-component-setup">Complete Daemon Component Setup</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-configure">1. Configure</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-change-ownership-and-access-permissions-for-acl-core">2. Change Ownership and Access Permissions for ACL Core</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-create-a-group-called-laclm">3. Create a group called laclm</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-add-root-user-to-laclm-group">4. Add root user to laclm group</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-create-a-user-called-aclapi-with-no-home-least-privileges-and-added-into-laclm-group">5. Create a user called aclapi with no home, least privileges, and added into laclm group.</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#6-create-service-for-acl-api-daemon">6. Create service for ACL API Daemon</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#a-create-the-systemd-service-file">a. Create the systemd service file</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#b-copy-this-into-aclapiservice">b. Copy this into aclapi.service</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#7-create-service-for-acl-core-daemon">7. Create service for ACL Core Daemon</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#a-create-the-systemd-service-file_1">a. Create the systemd service file</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#b-copy-this-into-aclcoreservice">b. Copy this into aclcore.service</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#8-reload-systemd-daemons">8. Reload SystemD daemons</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#9-enable-aclcore-service-optional-daemon-will-auto-start-when-system-is-restarted">9. Enable aclcore service (optional: daemon will auto start when system is restarted)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#10-start-aclcore-service">10. Start aclcore service</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#11-check-aclcore-status">11. Check aclcore status</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12-enable-aclapi-service-optional-daemon-will-auto-start-when-system-is-restarted">12. Enable aclapi service (optional: daemon will auto start when system is restarted)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13-start-aclapi-service">13. Start aclapi service</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#14-check-aclapi-status">14. Check aclapi status</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#testing-deployment">Testing Deployment</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../changelog/">Changelog</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Frontend Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vortex | Linux ACL Management System</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Daemon Component</li>
+      <li class="breadcrumb-item active">Deployment</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><br></p>
+<h1 id="deployment">Deployment<a class="headerlink" href="#deployment" title="Permanent link">&para;</a></h1>
+<p>Deploying the Linux ACL Management System can done via various ways. This ranges for options prioritizing security while others prefer fast pace deployment.</p>
+<p>Since deploying the Linux ACL Daemons Components require <code>aclapi</code> and <code>aclcore</code> daemons, it is recommended that you install them together. </p>
+<h2 id="deploying-via-source-code">Deploying via Source Code<a class="headerlink" href="#deploying-via-source-code" title="Permanent link">&para;</a></h2>
+<p>This method is the most secure and manual way of deploying Linux ACL Management System. It is recommended for institutions deploying it in an isolated environment without internet connection by building the binaries on-site where it is intended to deploy.</p>
+<h3 id="1-install-the-source-code-tarball">1. Install the Source Code Tarball<a class="headerlink" href="#1-install-the-source-code-tarball" title="Permanent link">&para;</a></h3>
+<p>To install the tarball, visit the official repository and follow the instructions.</p>
+<p>Copy the following commands to install it via command line. Make sure you have <code>curl</code> installed on the system.</p>
+<h4 id="linux-amd64-architecture">Linux AMD64 Architecture<a class="headerlink" href="#linux-amd64-architecture" title="Permanent link">&para;</a></h4>
+<p><strong>For ACl API Daemon:</strong></p>
+<pre class="codehilite"><code class="language-bash">curl -L -o aclapi.tar.gz https://github.com/PythonHacker24/linux-acl-management-aclapi/raw/refs/heads/development-v1/build/aclapi-linux-amd64-source.tar.gz
+</code></pre>
+
+<p><strong>For ACL Core Daemon:</strong></p>
+<pre class="codehilite"><code class="language-bash">curl -L -o aclcore.tar.gz https://github.com/PythonHacker24/linux-acl-management-aclcore/raw/refs/heads/development-v1/build/aclcore-linux-amd64-source.tar.gz
+</code></pre>
+
+<h4 id="linux-arm64-architecture">Linux ARM64 Architecture¶<a class="headerlink" href="#linux-arm64-architecture" title="Permanent link">&para;</a></h4>
+<p><strong>For ACl API Daemon:</strong></p>
+<pre class="codehilite"><code class="language-bash">curl -L -o aclapi.tar.gz https://github.com/PythonHacker24/linux-acl-management-aclapi/raw/refs/heads/development-v1/build/aclapi-linux-arm64-source.tar.gz
+</code></pre>
+
+<p><strong>For ACL Core Daemon:</strong></p>
+<pre class="codehilite"><code class="language-bash">curl -L -o aclcore.tar.gz https://github.com/PythonHacker24/linux-acl-management-aclcore/raw/refs/heads/development-v1/build/aclcore-linux-arm64-source.tar.gz
+</code></pre>
+
+<p>You may now ship the tarball to any system with no internet connection and you will be able to build from the source code there provided that you have proper build tools installed on the target machine.</p>
+<h3 id="2-extract-the-source-code-tarball">2. Extract the Source Code Tarball<a class="headerlink" href="#2-extract-the-source-code-tarball" title="Permanent link">&para;</a></h3>
+<p>Extract source code from tarball with following command. Make sure you have <code>tar</code> installed on the system.</p>
+<p><strong>For ACL API Daemon:</strong></p>
+<pre class="codehilite"><code class="language-bash">tar -xzf aclapi.tar.gz
+</code></pre>
+
+<p><strong>For ACL Core Daemon:</strong></p>
+<pre class="codehilite"><code class="language-bash">tar -xzf aclcore.tar.gz
+</code></pre>
+
+<p>This will create a 2 folders in your current directory. You need to build them in their own directory. </p>
+<h3 id="3-build-locally">3. Build Locally<a class="headerlink" href="#3-build-locally" title="Permanent link">&para;</a></h3>
+<p>You can build the binary with the following command:</p>
+<p><strong>For ACL API Daemon:</strong></p>
+<pre class="codehilite"><code class="language-bash">cd aclapi/
+make build-offline
+</code></pre>
+
+<p><strong>For ACL Core Daemon:</strong></p>
+<pre class="codehilite"><code class="language-bash">cd aclcore/
+make build-offline
+</code></pre>
+
+<p>This will build the binary for the source code and store it at <code>/bin</code>. You should see <code>aclapi/bin/aclapi</code> and <code>aclcore/bin/aclcore</code> binaires respectively.</p>
+<p>After building the binaries, move them to <code>/usr/local/bin/</code>.</p>
+<p><strong>Move ACL API to <code>/usr/local/bin/</code></strong></p>
+<pre class="codehilite"><code class="language-bash">sudo cp ./bin/aclapi /usr/local/bin/
+</code></pre>
+
+<p><strong>Move ACL Core to <code>/usr/local/bin/</code></strong></p>
+<pre class="codehilite"><code class="language-bash">sudo cp ./bin/aclcore /usr/local/bin/
+</code></pre>
+
+<p><code>/usr/local/bin/</code> is the location where our systemd service will load the binaries from to create daemons that will run in the background.</p>
+<p>After completing this steps, you can jump to <strong>Complete Daemon Component Setup</strong> for steps.</p>
+<h2 id="deploying-via-prebuilt-binaries">Deploying via Prebuilt Binaries<a class="headerlink" href="#deploying-via-prebuilt-binaries" title="Permanent link">&para;</a></h2>
+<p>You can install prebuilt libraries from offical GitHub repository.</p>
+<p>Copy the following commands to install it via command line. Make sure you have <code>curl</code> installed on the system.</p>
+<h4 id="linux-amd64-architecture_1">Linux AMD64 Architecture<a class="headerlink" href="#linux-amd64-architecture_1" title="Permanent link">&para;</a></h4>
+<p><strong>ACL API Daemon:</strong></p>
+<pre class="codehilite"><code class="language-bash">curl -L -o aclapi https://github.com/PythonHacker24/linux-acl-management-aclapi/raw/refs/heads/main/bin/aclapi-linux-amd64
+</code></pre>
+
+<p><strong>ACL Core Daemon:</strong></p>
+<pre class="codehilite"><code class="language-bash">curl -L -o aclcore https://github.com/PythonHacker24/linux-acl-management-aclcore/raw/refs/heads/main/bin/aclcore-linux-amd64
+</code></pre>
+
+<h4 id="linux-arm64-architecture_1">Linux ARM64 Architecture¶<a class="headerlink" href="#linux-arm64-architecture_1" title="Permanent link">&para;</a></h4>
+<p><strong>ACL API Daemon:</strong></p>
+<pre class="codehilite"><code class="language-bash">curl -L -o aclapi https://github.com/PythonHacker24/linux-acl-management-aclapi/raw/refs/heads/main/bin/aclapi-linux-arm64
+</code></pre>
+
+<p><strong>ACL Core Daemon:</strong></p>
+<pre class="codehilite"><code class="language-bash">curl -L -o aclcore https://github.com/PythonHacker24/linux-acl-management-aclcore/raw/refs/heads/main/bin/aclcore-linux-arm64
+</code></pre>
+
+<p>After completing this steps, you can jump to <strong>Complete Daemon Component Setup</strong> for steps.</p>
+<h2 id="complete-daemon-component-setup">Complete Daemon Component Setup<a class="headerlink" href="#complete-daemon-component-setup" title="Permanent link">&para;</a></h2>
+<p>At this point, you have a binary built/installed in your preferred way and we are ready to deploy it on the file server.</p>
+<h3 id="1-configure">1. Configure<a class="headerlink" href="#1-configure" title="Permanent link">&para;</a></h3>
+<p>With the source code of ACL API and ACL Core, you get <code>aclapi.yaml</code> and <code>aclcore.yaml</code> which you can configure with. For more information related to configuration, refer <a href="">here</a>.</p>
+<p>After you configure the binaries, move them to <code>/etc/laclm/</code> from which the systemd will load the configuration from and provide it to the binary.</p>
+<p>First, create a directory called <code>/etc/laclm/</code>:</p>
+<pre class="codehilite"><code class="language-bash">mkdir /etc/laclm/
+</code></pre>
+
+<p>Move the configuration files to <code>/etc/laclm/</code></p>
+<pre class="codehilite"><code class="language-bash">cp aclapi/aclapi.yaml /etc/laclm/
+</code></pre>
+
+<pre class="codehilite"><code class="language-bash">cp aclcore/aclcore.yaml /etc/laclm/
+</code></pre>
+
+<h3 id="2-change-ownership-and-access-permissions-for-acl-core">2. Change Ownership and Access Permissions for ACL Core<a class="headerlink" href="#2-change-ownership-and-access-permissions-for-acl-core" title="Permanent link">&para;</a></h3>
+<p>Since <code>aclcore</code> is going to run as root, you need to change the ownership of it to root and provide 775 permissions to it.</p>
+<pre class="codehilite"><code class="language-bash">sudo chown root:root /usr/local/bin/aclcore
+sudo chmod 755 /usr/local/bin/aclcore
+</code></pre>
+
+<h3 id="3-create-a-group-called-laclm">3. Create a group called <code>laclm</code><a class="headerlink" href="#3-create-a-group-called-laclm" title="Permanent link">&para;</a></h3>
+<p>Create a group called <code>laclm</code>.</p>
+<pre class="codehilite"><code class="language-bash">sudo groupadd laclm
+</code></pre>
+
+<h3 id="4-add-root-user-to-laclm-group">4. Add root user to <code>laclm</code> group<a class="headerlink" href="#4-add-root-user-to-laclm-group" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-bash">sudo usermod -a -G laclm root
+</code></pre>
+
+<h3 id="5-create-a-user-called-aclapi-with-no-home-least-privileges-and-added-into-laclm-group">5. Create a user called <code>aclapi</code> with no home, least privileges, and added into <code>laclm</code> group.<a class="headerlink" href="#5-create-a-user-called-aclapi-with-no-home-least-privileges-and-added-into-laclm-group" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-bash">sudo useradd --system --no-create-home --shell /usr/sbin/nologin --groups laclm aclapi
+</code></pre>
+
+<h3 id="6-create-service-for-acl-api-daemon">6. Create service for ACL API Daemon<a class="headerlink" href="#6-create-service-for-acl-api-daemon" title="Permanent link">&para;</a></h3>
+<h4 id="a-create-the-systemd-service-file">a. Create the systemd service file<a class="headerlink" href="#a-create-the-systemd-service-file" title="Permanent link">&para;</a></h4>
+<pre class="codehilite"><code class="language-bash">sudo touch /etc/systemd/system/aclapi.service
+</code></pre>
+
+<h4 id="b-copy-this-into-aclapiservice">b. Copy this into aclapi.service<a class="headerlink" href="#b-copy-this-into-aclapiservice" title="Permanent link">&para;</a></h4>
+<pre class="codehilite"><code>[Unit]                                           
+Description=ACL API Daemon
+After=network.target
+Requires=aclcore.service
+
+[Service]
+Type=simple
+
+ExecStart=/usr/local/bin/aclapi --config /etc/laclm/aclapi.yaml
+
+User=aclapi
+Group=laclm
+
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+
+<h3 id="7-create-service-for-acl-core-daemon">7. Create service for ACL Core Daemon<a class="headerlink" href="#7-create-service-for-acl-core-daemon" title="Permanent link">&para;</a></h3>
+<h4 id="a-create-the-systemd-service-file_1">a. Create the systemd service file<a class="headerlink" href="#a-create-the-systemd-service-file_1" title="Permanent link">&para;</a></h4>
+<pre class="codehilite"><code class="language-bash">sudo touch /etc/systemd/system/aclcore.service
+</code></pre>
+
+<h4 id="b-copy-this-into-aclcoreservice">b. Copy this into aclcore.service<a class="headerlink" href="#b-copy-this-into-aclcoreservice" title="Permanent link">&para;</a></h4>
+<pre class="codehilite"><code>[Unit]
+Description=ACL Core Daemon
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/aclcore --config /etc/laclm/aclcore.yaml
+
+User=root
+Group=laclm
+
+PrivateTmp=yes
+ProtectSystem=full
+ProtectHome=yes
+NoNewPrivileges=yes
+
+PrivateNetwork=yes
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+
+<h3 id="8-reload-systemd-daemons">8. Reload SystemD daemons<a class="headerlink" href="#8-reload-systemd-daemons" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-bash">sudo systemctl daemon-reload
+</code></pre>
+
+<h3 id="9-enable-aclcore-service-optional-daemon-will-auto-start-when-system-is-restarted">9. Enable aclcore service (optional: daemon will auto start when system is restarted)<a class="headerlink" href="#9-enable-aclcore-service-optional-daemon-will-auto-start-when-system-is-restarted" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-bash">sudo systemctl enable aclcore.service
+</code></pre>
+
+<h3 id="10-start-aclcore-service">10. Start aclcore service<a class="headerlink" href="#10-start-aclcore-service" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-bash">sudo systemctl start aclcore.service
+</code></pre>
+
+<h3 id="11-check-aclcore-status">11. Check aclcore status<a class="headerlink" href="#11-check-aclcore-status" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-bash">sudo systemctl status aclcore.service
+</code></pre>
+
+<h3 id="12-enable-aclapi-service-optional-daemon-will-auto-start-when-system-is-restarted">12. Enable aclapi service (optional: daemon will auto start when system is restarted)<a class="headerlink" href="#12-enable-aclapi-service-optional-daemon-will-auto-start-when-system-is-restarted" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-bash">sudo systemctl enable aclapi.service
+</code></pre>
+
+<h3 id="13-start-aclapi-service">13. Start aclapi service<a class="headerlink" href="#13-start-aclapi-service" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-bash">sudo systemctl start aclapi.service
+</code></pre>
+
+<h3 id="14-check-aclapi-status">14. Check aclapi status<a class="headerlink" href="#14-check-aclapi-status" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-bash">sudo systemctl status aclapi.service
+</code></pre>
+
+<h2 id="testing-deployment">Testing Deployment<a class="headerlink" href="#testing-deployment" title="Permanent link">&para;</a></h2>
+<p>To test if the daemons are working properly, you can do manual tests before proceeding. The backend, however, attempts to connect all the daemons when it begins, so any daemon deployment issues can be caught while deploying the backend. However, it's better to test them beforehand.</p>
+<p>The ACL API Daemon exposes gRPC handler which you can interact with to test. You can use gRPC UI to connect to the ACL API Daemon and test it. </p>
+<p>Find gRPC UI <a href="https://github.com/fullstorydev/grpcui">here</a>. Install and configure it before proceeding.</p>
+<p>Run the following command to connect to the ACL API Daemon's gRPC Handler: </p>
+<pre class="codehilite"><code class="language-bash">grpcui -plaintext &lt;hostname&gt;:&lt;port&gt; 
+</code></pre>
+
+<p><code>hostname</code> is the IP of you machine which you testing device has access to and <code>port</code> is the network port you decided to use for the gRPC handler which is specified in <code>aclapi.yaml</code> (default is <code>6593</code>).</p>
+<p>You will get a localhost link on the system you are testing. Navigate to the URL and select <code>PingService</code>. If you are able to ping, then ACL API Daemon is working fine. </p>
+<p>To test ACL Core Daemon, you need to select <code>ACLEntry.Service</code> and you can try to change ACL value of a file by filling the parameters. The schema can be found <a href="">here</a>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../development/" class="btn btn-neutral float-left" title="Development"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../troubleshooting/" class="btn btn-neutral float-right" title="Troubleshooting">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../development/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../troubleshooting/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Installation - Vortex | Linux ACL Management System</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Installation";
+        var mkdocs_page_input_path = "03_frontend_component/installation.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vortex | Linux ACL Management System
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_getting_started/project_structure/">Project Structure</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Backend Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/deployment/">Deployment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Daemon Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/deployment/">Deployment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Frontend Component</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Installation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-getting-frontend-component">1. Getting Frontend Component</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-configuration">2. Configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-deploy-in-development-mode">3. Deploy in Development Mode</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-deploy-in-production-mode">4. Deploy in Production Mode</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vortex | Linux ACL Management System</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Frontend Component</li>
+      <li class="breadcrumb-item active">Installation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><br></p>
+<h1 id="frontend-quick-start">Frontend Quick Start<a class="headerlink" href="#frontend-quick-start" title="Permanent link">&para;</a></h1>
+<p>This guide will help you get up and running quickly, whether you’re developing locally or deploying in a containerized environment.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Node.js (LTS): 20.x or 22.x recommended</li>
+<li>npm: 10+ (bundled with Node.js)</li>
+</ul>
+<h2 id="1-getting-frontend-component">1. Getting Frontend Component<a class="headerlink" href="#1-getting-frontend-component" title="Permanent link">&para;</a></h2>
+<p>Clone the repository and enter the project directory:</p>
+<pre class="codehilite"><code class="language-bash">git clone &lt;repo-url&gt; frontend
+cd vortex-frontend
+</code></pre>
+
+<p>Ensure Node.js (LTS 20.x or 22.x) and npm are installed:</p>
+<pre class="codehilite"><code class="language-bash">node -v
+npm -v
+</code></pre>
+
+<h2 id="2-configuration">2. Configuration<a class="headerlink" href="#2-configuration" title="Permanent link">&para;</a></h2>
+<p>Create a .env.local file in the project root with your API endpoints:</p>
+<pre class="codehilite"><code class="language-bash"># Required: API base URL (defaults to http://localhost:8080 if omitted)
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8080
+
+# Optional: WebSocket base URL (auto-derived from API if omitted)
+# For http://localhost:8080 this becomes ws://localhost:8080
+# Set explicitly only if you need a different host/protocol:
+# NEXT_PUBLIC_WS_BASE_URL=ws://localhost:8080
+</code></pre>
+
+<h2 id="3-deploy-in-development-mode">3. Deploy in Development Mode<a class="headerlink" href="#3-deploy-in-development-mode" title="Permanent link">&para;</a></h2>
+<p>Install dependencies:</p>
+<pre class="codehilite"><code class="language-bash">npm install
+</code></pre>
+
+<p>Start the dev server (Turbopack):</p>
+<pre class="codehilite"><code class="language-bash">npm run dev
+</code></pre>
+
+<p>Open <code>http://localhost:3000</code></p>
+<div class="admonition info">
+<p class="admonition-title">Tips:</p>
+<p>Ensure your backend is reachable at NEXT_PUBLIC_API_BASE_URL. Update .env.local and restart the dev server if you change variables</p>
+</div>
+<h2 id="4-deploy-in-production-mode">4. Deploy in Production Mode<a class="headerlink" href="#4-deploy-in-production-mode" title="Permanent link">&para;</a></h2>
+<p>Set production environment variables</p>
+<pre class="codehilite"><code class="language-bash">export NEXT_PUBLIC_API_BASE_URL=https://your-api.example.com
+# Optional:
+# export NEXT_PUBLIC_WS_BASE_URL=wss://your-api.example.com
+</code></pre>
+
+<p>Install clean deps, build, and start:</p>
+<pre class="codehilite"><code class="language-bash">npm ci
+npm run build
+npm run start -p 3000
+</code></pre>
+
+<div class="admonition info">
+<p class="admonition-title">Notes:</p>
+<p>NEXT_PUBLIC_* variables are inlined at build time. Set them before npm run build. Ensure the API/WebSocket endpoints are reachable from the deployed environment.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../architecture/" class="btn btn-neutral float-left" title="Architecture"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../quick_start/" class="btn btn-neutral float-right" title="Quick Start">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../architecture/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../quick_start/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

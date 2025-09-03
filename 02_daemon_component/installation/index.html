@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Installation - Vortex | Linux ACL Management System</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Installation";
+        var mkdocs_page_input_path = "02_daemon_component/installation.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vortex | Linux ACL Management System
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_getting_started/project_structure/">Project Structure</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Backend Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/deployment/">Deployment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_backend_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Daemon Component</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Installation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-getting-the-acl-api-daemon">1. Getting the ACL API Daemon</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#through-prebuilt-binaries">Through Prebuilt Binaries</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#for-linux-x86_64">For Linux x86_64</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#for-linux-arm64">For Linux ARM64</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#through-github-source-code">Through GitHub Source Code</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-configuration">2. Configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-build">3. Build</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#using-go">Using Go</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#using-makefile">Using Makefile</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-useful-commands">4. Useful Commands</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../deployment/">Deployment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../changelog/">Changelog</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Frontend Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vortex | Linux ACL Management System</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Daemon Component</li>
+      <li class="breadcrumb-item active">Installation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><br></p>
+<h1 id="acl-api-daemon">ACL API Daemon<a class="headerlink" href="#acl-api-daemon" title="Permanent link">&para;</a></h1>
+<h2 id="1-getting-the-acl-api-daemon">1. Getting the ACL API Daemon<a class="headerlink" href="#1-getting-the-acl-api-daemon" title="Permanent link">&para;</a></h2>
+<h3 id="through-prebuilt-binaries">Through Prebuilt Binaries<a class="headerlink" href="#through-prebuilt-binaries" title="Permanent link">&para;</a></h3>
+<p>The prebuilt binaries are available to install on GitHub Releases for the Linux ACL Management Project.</p>
+<p>Here are one line commands to install them for all the architectures. Make sure you have curl installed.</p>
+<h4 id="for-linux-x86_64">For Linux x86_64<a class="headerlink" href="#for-linux-x86_64" title="Permanent link">&para;</a></h4>
+<pre class="codehilite"><code class="language-bash">curl -L https://github.com/example-org/aclm/releases/latest/download/aclapi-linux-amd64 -o /usr/local/bin/aclapi
+chmod +x /usr/local/bin/aclapi
+</code></pre>
+
+<h4 id="for-linux-arm64">For Linux ARM64<a class="headerlink" href="#for-linux-arm64" title="Permanent link">&para;</a></h4>
+<pre class="codehilite"><code class="language-bash">curl -L https://github.com/example-org/aclm/releases/latest/download/aclapi-linux-amd64 -o /usr/local/bin/aclapi
+chmod +x /usr/local/bin/aclapi
+</code></pre>
+
+<h3 id="through-github-source-code">Through GitHub Source Code<a class="headerlink" href="#through-github-source-code" title="Permanent link">&para;</a></h3>
+<p>Visit the <a href="https://github.com/PythonHacker24/linux-acl-management-aclapi">Official GitHub Repository</a> for Linux ACL Management System for the complete source code.</p>
+<p>To clone the repository from GitHub, use the following command. Make sure you have git installed on your system.</p>
+<pre class="codehilite"><code class="language-bash">git clone https://github.com/PythonHacker24/linux-acl-management-aclapi
+</code></pre>
+
+<h2 id="2-configuration">2. Configuration<a class="headerlink" href="#2-configuration" title="Permanent link">&para;</a></h2>
+<p>When working with the Linux ACL Management System's ACL API Daemon Component, all you need is the <code>aclapi</code> binary, <code>aclapi.yaml</code> with proper paramaters.</p>
+<p>The <code>aclapi.yaml</code> is the heart of the Linux ACL Management System ACL API Daemon and contains all you need to setup the system.</p>
+<p>More about configuration here: <strong>link to config</strong></p>
+<h2 id="3-build">3. Build<a class="headerlink" href="#3-build" title="Permanent link">&para;</a></h2>
+<p>There are currently 2 ways of building Linux ACL Management System ACL API Daemon Component.</p>
+<p>You can build and run the <code>aclapi</code> using Go directly or the Makefile.</p>
+<h3 id="using-go">Using Go<a class="headerlink" href="#using-go" title="Permanent link">&para;</a></h3>
+<p>Building through Go can be done through the Golang compiler with one command. Incase you don't have Go installed on your system, refer to the <a href="https://go.dev/doc/install">Official Golang Docs</a>.</p>
+<pre class="codehilite"><code class="language-bash">go build -o bin/aclapi ./cmd/aclapi
+</code></pre>
+
+<h3 id="using-makefile">Using Makefile<a class="headerlink" href="#using-makefile" title="Permanent link">&para;</a></h3>
+<p>For installing via Makefile, make sure you have <code>make</code> installed and follow the commands listed below. The Makefile will take care of all the building procdures as per your system. Just make sure that all the required dependences are installed (like Go, protoc, etc.)</p>
+<p>For installing <code>make</code>, follow the <a href="https://www.gnu.org/software/make/">Official Page</a> for GNU's make project</p>
+<pre class="codehilite"><code class="language-bash">make build
+</code></pre>
+
+<h2 id="4-useful-commands">4. Useful Commands<a class="headerlink" href="#4-useful-commands" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Build:</strong> <code>make build</code></li>
+<li><strong>Run:</strong> <code>make run</code></li>
+<li><strong>Test:</strong> <code>make test</code></li>
+<li><strong>Lint:</strong> <code>make lint</code> (requires golangci-lint)</li>
+<li><strong>Clean:</strong> <code>make clean</code></li>
+</ul>
+<p><br></p>
+<h1 id="acl-core-daemon">ACL Core Daemon<a class="headerlink" href="#acl-core-daemon" title="Permanent link">&para;</a></h1>
+<h2 id="1-getting-the-acl-core-daemon">1. Getting the ACL Core Daemon<a class="headerlink" href="#1-getting-the-acl-core-daemon" title="Permanent link">&para;</a></h2>
+<h3 id="through-prebuilt-binaries_1">Through Prebuilt Binaries<a class="headerlink" href="#through-prebuilt-binaries_1" title="Permanent link">&para;</a></h3>
+<p>The prebuilt binaries are available to install on GitHub Releases for the Linux ACL Management Project.</p>
+<p>Here are one line commands to install them for all the architectures. Make sure you have curl installed.</p>
+<h4 id="for-linux-x86_65">For Linux x86_64<a class="headerlink" href="#for-linux-x86_65" title="Permanent link">&para;</a></h4>
+<pre class="codehilite"><code class="language-bash">curl -L https://github.com/example-org/aclm/releases/latest/download/aclcore-linux-amd64 -o /usr/local/bin/aclcore
+chmod +x /usr/local/bin/aclcore
+</code></pre>
+
+<h4 id="for-linux-arm64_1">For Linux ARM64<a class="headerlink" href="#for-linux-arm64_1" title="Permanent link">&para;</a></h4>
+<pre class="codehilite"><code class="language-bash">curl -L https://github.com/example-org/aclm/releases/latest/download/aclcore-linux-amd64 -o /usr/local/bin/aclcore
+chmod +x /usr/local/bin/aclcore
+</code></pre>
+
+<h3 id="through-github-source-code_1">Through GitHub Source Code<a class="headerlink" href="#through-github-source-code_1" title="Permanent link">&para;</a></h3>
+<p>Visit the <a href="https://github.com/PythonHacker24/linux-acl-management-aclcore">Official GitHub Repository</a> for Linux ACL Management System for the complete source code.</p>
+<p>To clone the repository from GitHub, use the following command. Make sure you have git installed on your system.</p>
+<pre class="codehilite"><code class="language-bash">git clone https://github.com/PythonHacker24/linux-acl-management-aclcore
+</code></pre>
+
+<h2 id="2-configuration_1">2. Configuration<a class="headerlink" href="#2-configuration_1" title="Permanent link">&para;</a></h2>
+<p>When working with the Linux ACL Management System's ACL Core Daemon Component, all you need is the <code>aclcore</code> binary, <code>aclcore.yaml</code> with proper paramaters.</p>
+<p>The <code>aclcore.yaml</code> is the heart of the Linux ACL Management System ACL Core Daemon and contains all you need to setup the system.</p>
+<p>More about configuration here: <strong>link to config</strong></p>
+<h2 id="3-build_1">3. Build<a class="headerlink" href="#3-build_1" title="Permanent link">&para;</a></h2>
+<p>There are currently 2 ways of building Linux ACL Management System ACL Core Daemon Component.</p>
+<p>You can build and run the <code>aclcore</code> using Go directly or the Makefile.</p>
+<h3 id="using-go_1">Using Go<a class="headerlink" href="#using-go_1" title="Permanent link">&para;</a></h3>
+<p>Building through Go can be done through the Golang compiler with one command. Incase you don't have Go installed on your system, refer to the <a href="https://go.dev/doc/install">Official Golang Docs</a>.</p>
+<pre class="codehilite"><code class="language-bash">go build -o bin/aclcore ./cmd/aclcore
+</code></pre>
+
+<h3 id="using-makefile_1">Using Makefile<a class="headerlink" href="#using-makefile_1" title="Permanent link">&para;</a></h3>
+<p>For installing via Makefile, make sure you have <code>make</code> installed and follow the commands listed below. The Makefile will take care of all the building procdures as per your system. Just make sure that all the required dependences are installed (like Go, protoc, etc.)</p>
+<p>For installing <code>make</code>, follow the <a href="https://www.gnu.org/software/make/">Official Page</a> for GNU's make project</p>
+<pre class="codehilite"><code class="language-bash">make build
+</code></pre>
+
+<h2 id="4-useful-commands_1">4. Useful Commands<a class="headerlink" href="#4-useful-commands_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Build:</strong> <code>make build</code></li>
+<li><strong>Run:</strong> <code>make run</code></li>
+<li><strong>Test:</strong> <code>make test</code></li>
+<li><strong>Lint:</strong> <code>make lint</code> (requires golangci-lint)</li>
+<li><strong>Clean:</strong> <code>make clean</code></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../architecture/" class="btn btn-neutral float-left" title="Architecture"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../quick_start/" class="btn btn-neutral float-right" title="Quick Start">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../architecture/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../quick_start/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Installation - Vortex | Linux ACL Management System</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Installation";
+        var mkdocs_page_input_path = "01_backend_component/installation.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vortex | Linux ACL Management System
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_getting_started/project_structure/">Project Structure</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Backend Component</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Installation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-getting-the-backend-component">1. Getting the Backend Component</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#through-prebuilt-binaries">Through Prebuilt Binaries</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#for-linux-x86_64">For Linux x86_64</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#for-linux-arm64">For Linux ARM64</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#for-linux-armv7">For Linux ARMv7</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#through-github-source-code">Through GitHub Source Code</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-configuration">2. Configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-database-setup">3. Database Setup</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#postgresql">PostgreSQL</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#redis">Redis</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-build-only-for-users-with-source-code">4. Build (only for users with source code)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#using-go">Using Go</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#using-makefile">Using Makefile</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#using-docker">Using Docker</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-useful-commands">5. Useful Commands</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../deployment/">Deployment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../changelog/">Changelog</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Daemon Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/configuration/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/deployment/">Deployment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_daemon_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Frontend Component</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/architecture/">Architecture</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/quick_start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/development/">Development</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/troubleshooting/">Troubleshooting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_frontend_component/changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vortex | Linux ACL Management System</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Backend Component</li>
+      <li class="breadcrumb-item active">Installation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><br></p>
+<h1 id="backend-quick-start">Backend Quick Start<a class="headerlink" href="#backend-quick-start" title="Permanent link">&para;</a></h1>
+<p>This guide will help you get up and running quickly, whether you’re developing locally or deploying in a containerized environment.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Go (version 1.20+ recommended, for building with source code method)</li>
+<li>Docker and Docker Compose (for containerized setup only)</li>
+<li>PostgreSQL and Redis</li>
+<li>(Optional) Make (for using the Makefile)</li>
+</ul>
+<h2 id="1-getting-the-backend-component">1. Getting the Backend Component<a class="headerlink" href="#1-getting-the-backend-component" title="Permanent link">&para;</a></h2>
+<h3 id="through-prebuilt-binaries">Through Prebuilt Binaries<a class="headerlink" href="#through-prebuilt-binaries" title="Permanent link">&para;</a></h3>
+<p>The prebuilt binaries are available to install on GitHub Releases for the Linux ACL Management Project.</p>
+<p>Here are one line commands to install them for all the architectures. Make sure you have <code>curl</code> installed.</p>
+<h3 id="for-linux-x86_64">For Linux x86_64<a class="headerlink" href="#for-linux-x86_64" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-bash">curl -L https://github.com/example-org/aclm/releases/latest/download/aclm-linux-amd64 -o /usr/local/bin/aclm
+chmod +x /usr/local/bin/aclm
+</code></pre>
+
+<h3 id="for-linux-arm64">For Linux ARM64<a class="headerlink" href="#for-linux-arm64" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-bash">curl -L https://github.com/example-org/aclm/releases/latest/download/aclm-linux-amd64 -o /usr/local/bin/aclm
+chmod +x /usr/local/bin/aclm
+</code></pre>
+
+<h3 id="for-linux-armv7">For Linux ARMv7<a class="headerlink" href="#for-linux-armv7" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code class="language-bash">curl -L https://github.com/example-org/aclm/releases/latest/download/aclm-linux-amd64 -o /usr/local/bin/aclm
+chmod +x /usr/local/bin/aclm
+</code></pre>
+
+<h3 id="through-github-source-code">Through GitHub Source Code<a class="headerlink" href="#through-github-source-code" title="Permanent link">&para;</a></h3>
+<p>Visit the <a href="">Official GitHub Repository</a> for Linux ACL Management System for the complete source code.</p>
+<p>To clone the repository from GitHub, use the following command. Make sure you have <code>git</code> installed on your system.</p>
+<pre class="codehilite"><code class="language-bash">git clone https://github.com/PythonHacker24/linux-acl-management-backend.git
+</code></pre>
+
+<h2 id="2-configuration">2. Configuration<a class="headerlink" href="#2-configuration" title="Permanent link">&para;</a></h2>
+<p>When working with the Linux ACL Management System, all you need is the backend binary, <code>config.yaml</code>, and <code>.env</code> setup with proper paramaters. With these 3 components, you are ready to deploy the backend component.</p>
+<p>The <code>config.yaml</code> is the heart of the Linux ACL Management System and contains all you need to setup the system.</p>
+<p><code>.env</code> contains all the parameters that's meant to be server specific and kept secret (for example, database passwords, auth token parameters, etc.)</p>
+<p>More about configuration here: <em>link to config</em></p>
+<h2 id="3-database-setup">3. Database Setup<a class="headerlink" href="#3-database-setup" title="Permanent link">&para;</a></h2>
+<p>Linux ACL Management System uses PostgreSQL and Redis for operations purposes. Make sure both of them are running and are configured to be used with the backend. If you’re running the database locally, create the database and apply migrations:</p>
+<h3 id="postgresql">PostgreSQL<a class="headerlink" href="#postgresql" title="Permanent link">&para;</a></h3>
+<p>It's recommended to follow the <a href="https://www.postgresql.org/docs/">Official PostgreSQL</a> docs for setting it up. It can run on a seprate server or on the same server on which the backend is running. </p>
+<p>PostgreSQL is used as an archival database where sessions and transactions are stored when they are expired or the backend system is trigged to quit it's operation in middle of operation.</p>
+<pre class="codehilite"><code class="language-bash"># Start PostgreSQL
+sudo service postgresql start
+
+# Create the database (example)
+createdb your_db_name
+</code></pre>
+
+<p>After setting up the PostgreSQL database, you need to configure the schema for compatibility with the backend component. </p>
+<p>You just need to load up the following schema given <a href="https://github.com/PythonHacker24/linux-acl-management-backend/blob/development-v1/db/schema.sql">here</a>. You just have to copy paste the whole schema and execute it inside the database.</p>
+<h3 id="redis">Redis<a class="headerlink" href="#redis" title="Permanent link">&para;</a></h3>
+<p>Linux ACL Management System uses Redis for mirroring states of sessions and transactions for streaming on web dashboard. This allows the internal process scheduler to keep working on processing them without locking the resources for streaming on web dashboards frequently. When ever changes are made in sessions and transactions inside the backend system, the data is volunterly reflected in Redis which is ready to be served on frontend and any resource demanding it.  </p>
+<p>For more information on installing Redis, refer the <a href="https://redis.io/docs/latest/">Official Redis</a> docs.</p>
+<pre class="codehilite"><code class="language-bash"># Start Redis
+sudo service redis-server start
+</code></pre>
+
+<p>Alternatively, if you’re using Docker Compose, the services will be created automatically.</p>
+<h2 id="4-build-only-for-users-with-source-code">4. Build (only for users with source code)<a class="headerlink" href="#4-build-only-for-users-with-source-code" title="Permanent link">&para;</a></h2>
+<p>There are currently 3 ways of installing Linux ACL Management System Backend Component. </p>
+<h3 id="using-go">Using Go<a class="headerlink" href="#using-go" title="Permanent link">&para;</a></h3>
+<p>You can build and run the backend using Go directly, the Makefile, or Docker Compose.</p>
+<p>Building through Go can be done through the Golang compiler with one command. Incase you don't have Go installed on your system, refer to the <a href="https://go.dev/doc/install">Official Golang Docs</a>.</p>
+<pre class="codehilite"><code class="language-bash">go build -o bin/backend ./cmd/laclm
+</code></pre>
+
+<h3 id="using-makefile">Using Makefile<a class="headerlink" href="#using-makefile" title="Permanent link">&para;</a></h3>
+<p>For installing via Makefile, make sure you have <code>make</code> installed and follow the commands listed below. The Makefile will take care of all the building procdures as per your system. Just make sure that all the required dependences are installed (like Go, protoc, etc.)</p>
+<p>For installing <code>make</code>, follow the <a href="https://www.gnu.org/software/make/">Official Page</a> for GNU's make project</p>
+<pre class="codehilite"><code class="language-bash">make build
+</code></pre>
+
+<h3 id="using-docker">Using Docker<a class="headerlink" href="#using-docker" title="Permanent link">&para;</a></h3>
+<p>For systems with docker installed and configured on them, you can use the <code>Dockerfile</code> for building the project image and running it. </p>
+<p>Docker Compose is meant to be a testing/development environment which loads the project image and pairs it up with OpenLDAP, PHPLdapAdmin, etc. </p>
+<p><strong>Current <code>docker-compose.yaml</code> not recommended for production usage.</strong></p>
+<pre class="codehilite"><code class="language-bash">docker-compose up --build
+</code></pre>
+
+<p>Docker Compose will build the image, start the containers, and run the backend along with its dependencies.</p>
+<div class="admonition info">
+<p class="admonition-title">Note:</p>
+<p>A complete Docker-Compose file with databases and default configuration for quick deployment is under development. This will allow users to deploy the complete backend components with a few commands.</p>
+</div>
+<h2 id="5-useful-commands">5. Useful Commands<a class="headerlink" href="#5-useful-commands" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Build:</strong> <code>make build</code></li>
+<li><strong>Run:</strong> <code>make run</code></li>
+<li><strong>Test:</strong> <code>make test</code></li>
+<li><strong>Lint:</strong> <code>make lint</code> (requires golangci-lint)</li>
+<li><strong>Clean:</strong> <code>make clean</code></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../architecture/" class="btn btn-neutral float-left" title="Architecture"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../quick_start/" class="btn btn-neutral float-right" title="Quick Start">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../architecture/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../quick_start/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
