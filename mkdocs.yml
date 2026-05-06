@@ -1,4 +1,5 @@
 site_name: Vortex | Linux ACL Management System
+site_url: https://docs.vortex.justaditya.com/
 theme:
   name: readthedocs
   pygments_style: dracula
